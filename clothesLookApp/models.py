@@ -1,14 +1,16 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
-    name=models.CharField(max_length=100)
-    nick=models.CharField(unique=True,max_length=20)
-    email=models.EmailField(blank=False)
-    password=models.CharField(max_length=50)
-
-    def __str__(self):
-        return "%s %s" % (self.name)
+# class User(models.Model):
+#     name=models.CharField(max_length=100)
+#     nick=models.CharField(unique=True,max_length=20)
+#     email=models.EmailField(blank=False)
+#     password=models.CharField(max_length=50)
+#
+#     def __str__(self):
+#         return "%s %s" % (self.name)
 
 class Look(models.Model):
     season_choice=(
@@ -20,7 +22,7 @@ class Look(models.Model):
     title=models.CharField(max_length=100)
     description=models.CharField(max_length=300)
     season=models.CharField(max_length=100, choices=season_choice)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     def __str__(self):
         return self.title
 
@@ -28,7 +30,7 @@ class Comment(models.Model):
     subject=models.CharField(max_length=100)
     body=models.CharField(max_length=300)
     moment=models.DateTimeField(auto_now_add=True)
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     look=models.ForeignKey(Look, on_delete=models.CASCADE)
     def __str__(self):
         return self.subject
