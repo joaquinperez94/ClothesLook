@@ -19,8 +19,9 @@ from clothesLookApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.inicio),
+    path('inicio/', views.inicio),
     path('prendas/', views.inicio),
     path('looks/', views.inicio),
     path('login/', views.inicio),
+    path('signup/', views.signup, name='signup'),
 ]
