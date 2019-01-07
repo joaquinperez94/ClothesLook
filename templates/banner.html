@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='es'>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block titulo %}{% endblock %}</title>
+		<style>
+			{% block style_css %}{% endblock %}
+		</style>
+	</head>
+	<body>
+		<header>
+			{% block encabezado %}{% endblock %}
+			<nav>
+				<ul>
+                    <li><a href='/'>Inicio</a></li>
+                    <li><a href='/prendas'>Prendas</a></li>
+			        <li><a href='/looks'>Looks</a></li>
+			        <li><a href='/login'>Login</a></li>
+				</ul>
+			</nav>
+			<hr>
+		</header>
+		<section class='contenido'>
+			{% block contenido %}{% endblock %}
+		</section>
+		<footer>
+			<p>Proyecto para la Universidad de Sevilla, tomando los datos de Grouplens &copy;2018</p>
+		</footer>
+	</body>
+</html>

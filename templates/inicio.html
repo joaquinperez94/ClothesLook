@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang='es'>
-  <header>
-  	<nav>
-  		<ul>
-			<li><a href='/'>Inicio</a></li>
-			<li><a href='/prendas'>Prendas</a></li>
-			<li><a href='/looks'>Looks</a></li>
-			<li><a href='/login'>Login</a></li>
-		</ul>
-	</nav>
-  </header>
-  <section>
-    <h1>Esta es la página de inicio</h1>
+{% extends 'banner.html' %}
 
-  </section>
-</html>
+{% block titulo %} Inicio {% endblock %}
+
+{% block encabezado %}
+	<h1>Pagina de inicio</h1>
+{% endblock %}
+
+{% block contenido %}
+	<p>
+    AQUI EL CONTENIDO DE LA PAGINA DE INICIO
+	</p>
+{% endblock %}
