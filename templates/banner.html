@@ -2,7 +2,7 @@
 <html lang='es'>
 	<head>
 		<meta charset="utf-8">
-		<title>{% block titulo %}{% endblock %}</title>
+		<h1>ClothesApp</h1>
 		<style>
 			{% block style_css %}{% endblock %}
 		</style>
@@ -12,11 +12,19 @@
 			{% block encabezado %}{% endblock %}
 			<nav>
 				<ul>
-                    <li><a href='/'>Inicio</a></li>
+                    <li><a href='/inicio'>Inicio</a></li>
                     <li><a href='/prendas'>Prendas</a></li>
 			        <li><a href='/looks'>Looks</a></li>
-			        <li><a href='/login'>Login</a></li>
+
+                    {% if user.is_authenticated %}
+                    <li><a href='/logout'>Log out</a></li>
+                    {% else %}
+                    <li><a href='/login'>Login</a></li>
                     <li><a href='/signup'>Signup</a></li>
+                    {% endif %}
+
+
+
 				</ul>
 			</nav>
 			<hr>

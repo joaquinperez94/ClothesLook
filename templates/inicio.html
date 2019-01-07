@@ -2,11 +2,12 @@
 
 {% block titulo %} Inicio {% endblock %}
 
-{% block encabezado %}
-	<h1>Pagina de inicio</h1>
-{% endblock %}
 
 {% block contenido %}
+    {% if user.is_authenticated %}
+        <p>!!! Welcome {{ user.username }} !!!</p>
+    {% endif %}
+
 	<p>
     AQUI EL CONTENIDO DE LA PAGINA DE INICIO
 	</p>
