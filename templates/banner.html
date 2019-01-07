@@ -15,9 +15,11 @@
                     <li><a href='/inicio'>Inicio</a></li>
                     <li><a href='/prendas'>Prendas</a></li>
 			        <li><a href='/looks'>Looks</a></li>
-
+                    <li>------------------------------</li>
                     {% if user.is_authenticated %}
                     <li><a href='/logout'>Log out</a></li>
+                    <li><a href='/profile'>My profile</a></li>
+
                     {% else %}
                     <li><a href='/login'>Login</a></li>
                     <li><a href='/signup'>Signup</a></li>
@@ -33,7 +35,7 @@
 			{% block contenido %}{% endblock %}
 		</section>
 		<footer>
-			<p>Proyecto para la Universidad de Sevilla, tomando los datos de Grouplens &copy;2018</p>
+			<p>Proyecto para la Universidad de Sevilla</p>
 		</footer>
 	</body>
 </html>

@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 #PAGINA DE INICIO
@@ -17,10 +19,13 @@ def prendas(request):
 def looks(request):
     return render(request,'looks.html')
 
-#PAGINA DE LOGIN
-#def login(request):
-#    return render(request,'login.html')
+#PAGINA DE PROFILE
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'profile.html', {"user": user})
 
+#PAGINA DE REGISTRO
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
