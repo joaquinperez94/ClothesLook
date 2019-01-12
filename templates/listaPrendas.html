@@ -1,0 +1,22 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+	  	
+
+  <section>
+    <h1>Ver prendas</h1>
+       <h4><a href='create'>Crear nuevas prendas</a><br></h4>
+	<ul>
+		{% for clothe in clothes %}
+	  	<li>
+	  		<a href='mostrarPrenda/{{clothe.id}}'>{{clothe.name}}</a><br>
+	    </li>
+		{% endfor %}
+	</ul>
+  </section>
+  
+
+
+{% endblock %}
+
+

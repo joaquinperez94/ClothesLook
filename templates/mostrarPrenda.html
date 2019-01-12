@@ -1,0 +1,25 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+   <section>
+    <h2>{{prenda.name}}</h2>    
+    <div id='size'>
+    	<strong>Talla: </strong>{{prenda.size}}
+    </div>
+    <div id='brand'>
+    	<strong>Marca: </strong>{{prenda.brand}}
+    </div>
+    <div id='link'>
+    	<strong>Link:</strong><a href="{{prenda.link}}">{{prenda.link}}</a>
+    </div>
+    <div id='category'>
+    	<strong>Categoria: </strong>{{prenda.category}}
+    </div>
+     <div id='photo'>
+     	<img src={{MEDIA_URL}}{{prenda.photo}}>
+    </div>
+ </section>
+
+{% endblock %}
+
+
