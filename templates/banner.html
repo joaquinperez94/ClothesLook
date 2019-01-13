@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang='es'>
-	<head>
-		<meta charset="utf-8">
-		<h1>ClothesApp</h1>
-		<style>
-			{% block style_css %}{% endblock %}
-		</style>
-	</head>
-	<body>
-		<header>
-			{% block encabezado %}{% endblock %}
-			<nav>
-				<ul>
-                    <li><a href='/inicio'>Inicio</a></li>
-                    <li><a href='/prendas'>Prendas</a></li>
-			        <li><a href='/looks'>Looks</a></li>
-                    <li>------------------------------</li>
-                    {% if user.is_authenticated %}
-                    <li><a href='/logout'>Log out</a></li>
-                    <li><a href='/profile'>My profile</a></li>
+<html lang="en">
+<head>
+  <title>Banner</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<br>
 
-                    {% else %}
-                    <li><a href='/login'>Login</a></li>
-                    <li><a href='/signup'>Signup</a></li>
-                    {% endif %}
+<div class="container">
+  <h2>Clothes Looks</h2>
+  <br>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#Inicio">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#Prendas">Prendas</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#Looks">Looks</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#IniciarSesión">Iniciar sesión</a>
+    </li>
+  </ul>
 
 
+</div>
 
-				</ul>
-			</nav>
-			<hr>
-		</header>
-		<section class='contenido'>
-			{% block contenido %}{% endblock %}
-		</section>
-		<footer>
-			<p>Proyecto para la Universidad de Sevilla</p>
-		</footer>
-	</body>
+</body>
 </html>
