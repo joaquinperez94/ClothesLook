@@ -1,0 +1,22 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+	  	
+
+  <section>
+    <h1>Ver Looks</h1>
+       <h4><a href='create'>Crear nuevos looks</a><br></h4>
+	<ul>
+		{% for look in looks %}
+	  	<li>
+	  		<a href='mostrarLook/{{look.id}}'>{{look.name}}</a><br>
+	    </li>
+		{% endfor %}
+	</ul>
+  </section>
+  
+
+
+{% endblock %}
+
+

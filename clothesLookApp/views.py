@@ -6,8 +6,10 @@ from django.shortcuts import render, get_object_or_404
 
 from django.contrib.auth.models import User
 from clothesLookApp.forms import registrerClote
+from clothesLookApp.forms import registrerLook
 from django.http.response import HttpResponseRedirect
 from clothesLookApp.models import Clothing
+from clothesLookApp.models import Look
 from django.conf import settings
 
 # Create your views here.
@@ -39,7 +41,23 @@ def mostrar_prenda(request, id_prenda):
 
 #PAGINA DE LOOKS
 def looks(request):
-    return render(request,'looks.html')
+    if request.method == 'POST':
+        form = registrerLook(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/looks/')
+    else:
+        form = registrerLook()
+
+    return render(request, 'looks.html', {'form': form})
+
+def lista_looks(request):
+    looks=Look.objects.all()
+    return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
+
+def mostrar_look(request, id_look):
+    look = get_object_or_404(Clothing, pk=id_look)
+    return render(request,'mostrarLook.html',{'look':look,'MEDIA_URL': settings.MEDIA_URL})
 
 #PAGINA DE PROFILE
 def profile(request):

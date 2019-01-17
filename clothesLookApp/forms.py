@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-from clothesLookApp.models import Clothing
+from clothesLookApp.models import Clothing, Look
 from dataclasses import fields
 
 class registrerClote(forms.ModelForm):
@@ -33,3 +33,26 @@ class registrerClote(forms.ModelForm):
             'link': forms.TextInput(attrs={'class':'form-control'}),
             'category': forms.Select(attrs={'class':'form-control'}),
             }
+
+
+class registrerLook(forms.ModelForm):
+    class Meta:
+        model = Look
+
+        fields = [
+            'title',
+            'description',
+            'season',
+        ]
+
+        labels = {
+            'title': 'Title',
+            'description': 'Description',
+            'season': 'Season',
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'season': forms.Select(attrs={'class': 'form-control'}),
+        }

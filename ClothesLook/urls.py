@@ -21,10 +21,15 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio,name='inicio'),
+
     path('prendas/', views.lista_prendas,name='prendas'),
     path('prendas/create', views.prendas,name='Crear prendas'),
     re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
-    path('looks/', views.inicio),
+
+    path('looks/', views.lista_looks,name='looks'),
+    path('looks/create', views.looks,name='Crear Looks'),
+    re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
+
     path('signup/', views.signup, name='signup'),
     path('profile/', views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view()),
