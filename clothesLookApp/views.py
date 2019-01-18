@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.forms import UserCreationForm
+from .forms import UserCreateForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
@@ -69,14 +69,14 @@ def profile(request):
 #PAGINA DE REGISTRO
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreateForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            auth_login(request, user)
+            #user = authenticate(username=username, password=raw_password)
+            #auth_login(request, user)
             return redirect('/inicio/')
     else:
-        form = UserCreationForm()
+        form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
