@@ -2,12 +2,16 @@
 
 {% block contenido %}
     <h3>My Profile</h3>
-    <strong>Username: </strong>{{ user.username }}
-    <br>
-    <strong>Email: </strong>{{ user.email }}
+    <strong>Nickname: </strong>{{ user.nickName }}
     <br>
     <strong>First name: </strong>{{ user.first_name }}
     <br>
     <strong>Last name: </strong>{{ user.last_name }}
+    <br>
+    <strong>Year birth: </strong>{{ user.year_birth }}
+    <br>
+    <strong>Sex: </strong>{{ user.sex }}
+    <br>
+    <strong>Is staff: </strong>{{ user.is_staff }}
 
 {% endblock %}
