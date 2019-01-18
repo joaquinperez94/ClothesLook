@@ -24,6 +24,7 @@ urlpatterns = [
 
     path('prendas/', views.lista_prendas,name='prendas'),
     path('prendas/create', views.prendas,name='Crear prendas'),
+    path('prendas/filtrarCategory', views.filtrar_category_prenda , name='Filtrar prendas por categoria'),
     re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
 
     path('looks/', views.lista_looks,name='looks'),

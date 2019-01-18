@@ -39,18 +39,6 @@ class registrerLook(forms.ModelForm):
     class Meta:
         model = Look
 
-        fields = [
-            'title',
-            'description',
-            'season',
-        ]
-
-        labels = {
-            'title': 'Title',
-            'description': 'Description',
-            'season': 'Season',
-        }
-
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),

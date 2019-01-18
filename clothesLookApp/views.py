@@ -5,11 +5,9 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
 
 from django.contrib.auth.models import User
-from clothesLookApp.forms import registrerClote
-from clothesLookApp.forms import registrerLook
+from clothesLookApp.forms import registrerClote, registrerLook, filtrarCategory
 from django.http.response import HttpResponseRedirect
-from clothesLookApp.models import Clothing
-from clothesLookApp.models import Look
+from clothesLookApp.models import Clothing, Look
 from django.conf import settings
 
 # Create your views here.
@@ -37,6 +35,21 @@ def lista_prendas(request):
 def mostrar_prenda(request, id_prenda):
     prenda = get_object_or_404(Clothing, pk=id_prenda)
     return render(request,'mostrarPrenda.html',{'prenda':prenda,'MEDIA_URL': settings.MEDIA_URL})
+
+def filtrar_category_prenda(request):
+    if request.method=='POST':
+        form = filtrarCategory(request.POST)
+        if form.is_valid():   
+            form.save()         
+        return redirect('/prendas/')
+    else:
+        form = filtrarCategory()
+    
+    return render(request, 'prendas.html',{'form':form})
+    
+    
+    form = filtrarCategory()
+    return render(request,'filtrarCategoryPrenda.html',{'MEDIA_URL': settings.MEDIA_URL})
     
 
 #PAGINA DE LOOKS
