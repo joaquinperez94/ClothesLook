@@ -83,7 +83,6 @@ class UserCreateFormAdmin(UserCreationForm):
     SEX_OPTIONS = (
         ('M', _('Man')),
         ('W', _('Woman')),
-        ('N', _('Non-binary')),
     )
     formato = _("Format: dd/mm/YYYY"),
 
