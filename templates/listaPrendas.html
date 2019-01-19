@@ -2,20 +2,50 @@
 
 {% block contenido %}
 	  	
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;    
+}
+</style>
+</head>
 
-  <section>
-    <h1>Ver prendas</h1>
-       <h4><a href='create'>Crear nuevas prendas</a><br></h4>
-	<ul>
-		{% for clothe in clothes %}
-	  	<li>
-	  		<a href='mostrarPrenda/{{clothe.id}}'>{{clothe.name}}</a><br>
-	    </li>
+<table class = "table:table-bordered"
+	<thead>
+		<tr>
+			<td><strong>Nombre</strong></td>
+			<td><strong>Talla</strong></td>
+			<td><strong>Marca</strong></td>
+			<td><strong>Usuario</strong></td>
+			<td><strong>Categoria</strong></td>
+			<td></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for clothe in clothes%}
+		<tr>
+			<td>{{clothe.name}}</td>
+			<td>{{clothe.size}}</td>
+			<td>{{clothe.brand}}</td>
+			<td>{{clothe.user}}</td>
+			<td>{{clothe.category}}</td>
+			<td><a href='mostrarPrenda/{{clothe.id}}'>Ver {{clothe.name}}</a></td>
+		</tr>
 		{% endfor %}
-	</ul>
-  </section>
-  
+	</tbody>
+</table>
 
+{% if user.is_authenticated %}
+ 	<h4><a href='create'>Crear nuevas prendas</a><br></h4>
+{% endif %}
+
+<h4><a href='filtrarCategory'>Filtrar</a><br></h4>
 
 {% endblock %}
 

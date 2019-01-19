@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-from clothesLookApp.models import Clothing, Look
+from clothesLookApp.models import Clothing, Look, Category
 from dataclasses import fields
 from django import forms
 from django.contrib.auth import get_user_model
@@ -130,7 +130,7 @@ class UserCreateFormAdmin(UserCreationForm):
                 self.add_error('year_birth', _('Can´t be in future'))
 
 
-class registrerClote(forms.ModelForm):
+class createClothe(forms.ModelForm):
     class Meta:
         model = Clothing
 
@@ -140,6 +140,7 @@ class registrerClote(forms.ModelForm):
             'size',
             'brand',
             'link',
+            'user',
             'category',
         ]
 
@@ -149,6 +150,7 @@ class registrerClote(forms.ModelForm):
             'size': 'Size',
             'brand': 'Brand',
             'link': 'Link',
+            'user': 'User',
             'category': 'Category',
         }
 
@@ -158,16 +160,34 @@ class registrerClote(forms.ModelForm):
             'size': forms.TextInput(attrs={'class':'form-control'}),
             'brand': forms.TextInput(attrs={'class':'form-control'}),
             'link': forms.TextInput(attrs={'class':'form-control'}),
+            'user': forms.Select(attrs={'class':'form-control'}),
             'category': forms.Select(attrs={'class':'form-control'}),
+            }
+        
+class filtrarCategory(forms.ModelForm):
+    class Meta:
+        model = Category
+
+        fields = [
+            'name',
+        ]
+
+        labels = {
+            'name': 'Name',
+        }
+
+        widgets = {
+            'name': forms.Select(attrs={'class':'form-control'}),
             }
 
 
-class registrerLook(forms.ModelForm):
-    class Meta:
-        model = Look
 
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.TextInput(attrs={'class': 'form-control'}),
-            'season': forms.Select(attrs={'class': 'form-control'}),
-        }
+# class registrerLook(forms.ModelForm):
+#     class Meta:
+#         model = Look
+# 
+#         widgets = {
+#             'title': forms.TextInput(attrs={'class': 'form-control'}),
+#             'description': forms.TextInput(attrs={'class': 'form-control'}),
+#             'season': forms.Select(attrs={'class': 'form-control'}),
+#         }

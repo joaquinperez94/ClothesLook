@@ -5,9 +5,10 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
 
 from django.contrib.auth.models import User
-from clothesLookApp.forms import registrerClote, registrerLook, filtrarCategory
+from clothesLookApp.forms import createClothe, filtrarCategory
+#from clothesLookApp.forms import  registrerLook
 from django.http.response import HttpResponseRedirect
-from clothesLookApp.models import Clothing, Look
+from clothesLookApp.models import Clothing, Look, User, Category
 from django.conf import settings
 
 # Create your views here.
@@ -16,41 +17,60 @@ from django.conf import settings
 def inicio(request):
     return render(request,'inicio.html')
 
-#PAGINA DE PRENDAS
-def prendas(request):    
-    if request.method=='POST':
-        form = registrerClote(request.POST)
-        if form.is_valid():   
-            form.save()         
-        return redirect('/prendas/')
-    else:
-        form = registrerClote()
+#PAGINA DE PRENDAS 
+def prendas_create(request):     
+    if request.user.is_authenticated:
+        user = request.user   
+        if request.method=='POST':
+            form = createClothe(request.POST)
+            if form.is_valid():   
+                form.save()         
+                return redirect('/prendas/listUser')
+        else:
+            form = createClothe()
+            return render(request, 'prendas.html',{'form':form})
     
-    return render(request, 'prendas.html',{'form':form})
-
 def lista_prendas(request):
     prendas=Clothing.objects.all()
     return render(request,'listaPrendas.html', {'clothes':prendas,'MEDIA_URL': settings.MEDIA_URL})
 
+def lista_prendas_usuario(request):
+    prendas=Clothing.objects.filter(user = request.user)
+    return render(request,'listaPrendas.html', {'clothes':prendas,'MEDIA_URL': settings.MEDIA_URL})  
+
 def mostrar_prenda(request, id_prenda):
     prenda = get_object_or_404(Clothing, pk=id_prenda)
     return render(request,'mostrarPrenda.html',{'prenda':prenda,'MEDIA_URL': settings.MEDIA_URL})
+     
+# def lista_filtrada(request, categoria):
+#     prendas=Clothing.objects.filter(category = categoria)
+#     return render(request,'mostrarPrenda.html',{'prenda':prenda,'MEDIA_URL': settings.MEDIA_URL})
+# 
+
 
 def filtrar_category_prenda(request):
     if request.method=='POST':
-        form = filtrarCategory(request.POST)
-        if form.is_valid():   
-            form.save()         
-        return redirect('/prendas/')
+        categoriaSelect = request.POST['category']  
+        #asnum = filtrar_category_prenda(categoriaSelect)
+        prendas=Clothing.objects.filter(category  = categoriaSelect)       
+        return render(request,'listaPrendas.html', {'clothes':prendas,'MEDIA_URL': settings.MEDIA_URL})
     else:
-        form = filtrarCategory()
-    
-    return render(request, 'prendas.html',{'form':form})
-    
-    
-    form = filtrarCategory()
-    return render(request,'filtrarCategoryPrenda.html',{'MEDIA_URL': settings.MEDIA_URL})
-    
+        categorias = Category.objects.all()
+        return render(request,'filtrarCategoriaPrendas.html', {'categorias':categorias,'MEDIA_URL': settings.MEDIA_URL})
+ 
+# 
+# def filtrar_category_prenda(categoriaSelect):
+#     prendas=Clothing.objects.all();
+#     a = 0
+#     for prenda in prendas:        
+#         if(prenda.category == categoriaSelect):
+#             break
+#         else:
+#             a += a
+#         
+#     return a       
+#         
+#         
 
 #PAGINA DE LOOKS
 def looks(request):

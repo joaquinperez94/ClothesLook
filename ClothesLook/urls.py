@@ -22,8 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio,name='inicio'),
 
-    path('prendas/', views.lista_prendas,name='prendas'),
-    path('prendas/create', views.prendas,name='Crear prendas'),
+    path('prendas/list', views.lista_prendas,name='prendas'),
+    path('prendas/listUser', views.lista_prendas_usuario,name='prendasUsuario'),
+    path('prendas/create', views.prendas_create,name='Crear prendas'),
     path('prendas/filtrarCategory', views.filtrar_category_prenda , name='Filtrar prendas por categoria'),
     re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
 

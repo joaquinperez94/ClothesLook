@@ -1,0 +1,22 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+<form method = "post">
+{% csrf_token %}
+<select name = "category" >
+
+
+
+{{ athlete_list|length }}
+{% for categoria in categorias %}
+   <option value="{{categoria.id}}"
+       {% if categoria == current_org %}selected="selected"{% endif %}>
+       {{categoria.name|capfirst}}
+   </option>
+{% endfor %}
+</select>
+
+<input  type = "submit" value="Submit">
+</form>
+{% endblock %}
+
