@@ -35,30 +35,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'nickName'
     REQUIRED_FIELDS = []
 
-class Look(models.Model):
-    season_choice=(
-        ('Primavera','Primavera'),
-        ('Verano','Verano'),
-        ('Otoño','Otoño'),
-        ('Invierno','Invierno')
-    )
-    title=models.CharField(max_length=100)
-    description=models.CharField(max_length=300)
-    season=models.CharField(max_length=100, choices=season_choice)
-    #user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.title
 
-class Comment(models.Model):
-    subject=models.CharField(max_length=100)
-    body=models.CharField(max_length=300)
-    moment=models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    look=models.ForeignKey(Look, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.subject
+
+
 
 class Category(models.Model):
     name=models.CharField(max_length=100)
@@ -75,5 +54,31 @@ class Clothing(models.Model):
     category=models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+class Look(models.Model):
+    season_choice=(
+        ('Primavera','Primavera'),
+        ('Verano','Verano'),
+        ('Otoño','Otoño'),
+        ('Invierno','Invierno')
+    )
+    title=models.CharField(max_length=100)
+    description=models.CharField(max_length=300)
+    season=models.CharField(max_length=100, choices=season_choice)
+    #user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    clothes = models.ManyToManyField(Clothing)
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    subject=models.CharField(max_length=100)
+    body=models.CharField(max_length=300)
+    moment=models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    look=models.ForeignKey(Look, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.subject
 
 
