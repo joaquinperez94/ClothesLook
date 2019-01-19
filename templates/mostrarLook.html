@@ -3,17 +3,19 @@
 {% block contenido %}
    <section>
     <h2>{{look.title}}</h2>
-    <div id='title'>
-    	<strong>Titulo: </strong>{{look.title}}
-    </div>
     <div id='description'>
     	<strong>Descripcion: </strong>{{look.description}}
     </div>
     <div id='season'>
     	<strong>Temporada: </strong>{{look.season}}
     </div>
-    </section>
+    <div id='user'>
+    	<strong>Usuario: </strong>{{look.user.nickName}}
+    </div>
+    <div id='clothes'>
+        <strong>Usuario: </strong><a href='mostrarPrenda/{{look.clothes.id}}'>{{look.clothes.name}}</a>
+    </div>
+ </section>
 
 {% endblock %}
-
 

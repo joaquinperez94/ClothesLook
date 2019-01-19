@@ -73,24 +73,27 @@ def filtrar_category_prenda(request):
 #         
 
 #PAGINA DE LOOKS
-def looks(request):
-    if request.method == 'POST':
-        form = registrerLook(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('/looks/')
-    else:
-        form = registrerLook()
-
-    return render(request, 'looks.html', {'form': form})
+"""def looks_create(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if request.method=='POST':
+            form = createLook(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/looks/listUser')
+        else:
+            form = createLook()
+            return render(request, 'looks.html',{'form':form})"""
 
 def lista_looks(request):
     looks=Look.objects.all()
     return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
 
 def mostrar_look(request, id_look):
-    look = get_object_or_404(Clothing, pk=id_look)
+    look = get_object_or_404(Look, pk=id_look)
     return render(request,'mostrarLook.html',{'look':look,'MEDIA_URL': settings.MEDIA_URL})
+
+
 
 #PAGINA DE PROFILE
 def profile(request):

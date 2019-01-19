@@ -182,12 +182,29 @@ class filtrarCategory(forms.ModelForm):
 
 
 
-# class registrerLook(forms.ModelForm):
-#     class Meta:
-#         model = Look
-# 
-#         widgets = {
-#             'title': forms.TextInput(attrs={'class': 'form-control'}),
-#             'description': forms.TextInput(attrs={'class': 'form-control'}),
-#             'season': forms.Select(attrs={'class': 'form-control'}),
-#         }
+"""class createLook(forms.ModelForm):
+    class Meta:
+        model = Look
+
+        fields = [
+            'title',
+            'description',
+            'season',
+            'user',
+            'clothes',
+        ]
+
+        labels = {
+            'title': 'Title',
+            'description': 'Description',
+            'season': 'Season',
+            'user': 'User',
+            'clothes': 'Clothes',
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'description': forms.TextInput(attrs={'class':'form-control'}),
+            'season': forms.Select(attrs={'class':'form-control'}),
+            'clothes': forms.Select(attrs={'class':'form-control'}),
+            }"""

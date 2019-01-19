@@ -2,21 +2,50 @@
 
 {% block contenido %}
 	  	
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+</head>
 
-  <section>
-    <h1>Ver Looks</h1>
-       <h4><a href='create'>Crear nuevos looks</a><br></h4>
-	<ul>
-		{% for look in looks %}
-	  	<li>
-	  		<a href='mostrarLook/{{look.id}}'>{{look.name}}</a><br>
-	    </li>
+<table class = "table:table-bordered"
+	<thead>
+		<tr>
+			<td><strong>Titulo</strong></td>
+			<td><strong>Descripcion</strong></td>
+			<td><strong>Temporada</strong></td>
+			<td><strong>Usuario</strong></td>
+			<td><strong>Prendas</strong></td>
+			<td></td>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for look in looks%}
+		<tr>
+			<td>{{look.title}}</td>
+			<td>{{look.description}}</td>
+			<td>{{look.season}}</td>
+			<td>{{look.user}}</td>
+			<td><a href='mostrarPrenda/{{look.clothes.id}}'>{{look.clothes.name}}</a></td>
+			<td><a href='mostrarLook/{{look.id}}'>Ver {{look.title}}</a></td>
+		</tr>
 		{% endfor %}
-	</ul>
-  </section>
-  
+	</tbody>
+</table>
 
+{% if user.is_authenticated %}
+ 	<h4><a href='create'>Crear nuevos looks</a><br></h4>
+{% endif %}
+
+<h4><a href='filtrarSeason'>Filtrar</a><br></h4>
 
 {% endblock %}
-
 

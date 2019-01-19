@@ -28,8 +28,9 @@ urlpatterns = [
     path('prendas/filtrarCategory', views.filtrar_category_prenda , name='Filtrar prendas por categoria'),
     re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
 
-    path('looks/', views.lista_looks,name='looks'),
-    path('looks/create', views.looks,name='Crear Looks'),
+    path('looks/list', views.lista_looks,name='looks'),
+    #path('looks/listUser', views.lista_looks_usuario,name='looksUsuario'),
+    #path('looks/create', views.looks_create,name='Crear Looks'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
 
     path('signup/', views.signup, name='signup'),
