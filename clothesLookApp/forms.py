@@ -182,7 +182,7 @@ class filtrarCategory(forms.ModelForm):
 
 
 
-"""class createLook(forms.ModelForm):
+class createLook(forms.ModelForm):
     class Meta:
         model = Look
 
@@ -206,5 +206,6 @@ class filtrarCategory(forms.ModelForm):
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'description': forms.TextInput(attrs={'class':'form-control'}),
             'season': forms.Select(attrs={'class':'form-control'}),
+            'user': forms.Select(attrs={'class': 'form-control'}),
             'clothes': forms.Select(attrs={'class':'form-control'}),
-            }"""
+            }

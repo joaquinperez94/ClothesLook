@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
 
 from django.contrib.auth.models import User
-from clothesLookApp.forms import createClothe, filtrarCategory
+from clothesLookApp.forms import createClothe, filtrarCategory, createLook
 #from clothesLookApp.forms import  registrerLook
 from django.http.response import HttpResponseRedirect
 from clothesLookApp.models import Clothing, Look, User, Category
@@ -73,7 +73,7 @@ def filtrar_category_prenda(request):
 #         
 
 #PAGINA DE LOOKS
-"""def looks_create(request):
+def looks_create(request):
     if request.user.is_authenticated:
         user = request.user
         if request.method=='POST':
@@ -83,10 +83,14 @@ def filtrar_category_prenda(request):
                 return redirect('/looks/listUser')
         else:
             form = createLook()
-            return render(request, 'looks.html',{'form':form})"""
+            return render(request, 'looks.html',{'form':form})
 
 def lista_looks(request):
     looks=Look.objects.all()
+    return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
+
+def lista_looks_usuario(request):
+    looks=Look.objects.filter(user = request.user)
     return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
 
 def mostrar_look(request, id_look):

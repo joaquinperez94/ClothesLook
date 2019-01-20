@@ -29,8 +29,8 @@ urlpatterns = [
     re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
 
     path('looks/list', views.lista_looks,name='looks'),
-    #path('looks/listUser', views.lista_looks_usuario,name='looksUsuario'),
-    #path('looks/create', views.looks_create,name='Crear Looks'),
+    path('looks/listUser', views.lista_looks_usuario,name='looksUsuario'),
+    path('looks/create', views.looks_create,name='Crear Looks'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
 
     path('signup/', views.signup, name='signup'),
