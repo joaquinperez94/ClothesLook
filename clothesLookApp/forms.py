@@ -123,7 +123,7 @@ class UserCreateFormAdmin(UserCreationForm):
                 self.add_error('year_birth', _('Can´t be in future'))
 
 
-class createClothing(forms.ModelForm):
+class ClothingForm(forms.ModelForm):
     class Meta:
         model = Clothing
 

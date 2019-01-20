@@ -28,6 +28,7 @@ urlpatterns = [
     path('clothing/create', views.clothing_create,name='Create clothing'),
     path('clothing/filterCategory', views.filter_category_clothing , name='Filter clothing per category'),
     re_path(r'display/(?P<id_clothing>\d+)',views.display_clothing),
+    re_path(r'edit/(?P<id_clothing>\d+)',views.edit_clothing),
     re_path(r'delete/(?P<id_clothing>\d+)',views.delete_clothing),
 
     path('looks/list', views.lista_looks,name='looks'),

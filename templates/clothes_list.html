@@ -34,8 +34,9 @@ th, td {
 			<td>{{clothing.brand}}</td>
 			<td>{{clothing.user}}</td>
 			<td>{{clothing.category}}</td>
-			<td><a href='display/{{clothing.id}}'>Display {{clothing.name}}</a></td>
+			<td><a href='display/{{clothing.id}}'>Display {{clothing.name}}</a></td>			
 			{% if user.is_authenticated and clothing.user == user %}
+				<td><a href='edit/{{clothing.id}}'>Edit {{clothing.name}}</a></td>
 				<td><a href='delete/{{clothing.id}}'>Delete</a></td>
 			{% endif %}
 		
@@ -49,7 +50,6 @@ th, td {
 {% endif %}
 
 <h4><a href='filterCategory'>Filter</a><br></h4>
-
 {% endblock %}
 
 
