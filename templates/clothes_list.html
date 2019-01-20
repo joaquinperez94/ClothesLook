@@ -1,0 +1,55 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+	  	
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;    
+}
+</style>
+</head>
+
+<table class = "table:table-bordered"
+	<thead>
+		<tr>
+			<td><strong>Name</strong></td>
+			<td><strong>Size</strong></td>
+			<td><strong>Brand</strong></td>
+			<td><strong>User</strong></td>
+			<td><strong>Category</strong></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for clothing in clothes%}
+		<tr>
+			<td>{{clothing.name}}</td>
+			<td>{{clothing.size}}</td>
+			<td>{{clothing.brand}}</td>
+			<td>{{clothing.user}}</td>
+			<td>{{clothing.category}}</td>
+			<td><a href='display/{{clothing.id}}'>Display {{clothing.name}}</a></td>
+			{% if user.is_authenticated and clothing.user == user %}
+				<td><a href='delete/{{clothing.id}}'>Delete</a></td>
+			{% endif %}
+		
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% if user.is_authenticated %}
+ 	<h4><a href='create'>Create new clothing</a><br></h4>
+{% endif %}
+
+<h4><a href='filterCategory'>Filter</a><br></h4>
+
+{% endblock %}
+
+

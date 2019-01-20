@@ -1,0 +1,11 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+
+<form method='POST'>{% csrf_token %}
+    <h1>Do you want to delete clothing {{ clothing.name }}?</h1>
+    <button class="btm btn-danger" type="submit">Yes</button>
+    <a href='../list'>Cancel</a></p>
+
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+   <section>
+    <h2>{{clothing.name}}</h2>    
+    <div id='size'>
+    	<strong>Size: </strong>{{clothing.size}}
+    </div>
+    <div id='brand'>
+    	<strong>Brand: </strong>{{clothing.brand}}
+    </div>
+    <div id='link'>
+    	<strong>Link:</strong><a href="{{clothing.link}}">{{prenda.link}}</a>
+    </div>
+    <div id='category'>
+    	<strong>Category: </strong>{{clothing.category}}
+    </div>
+     <div id='user'>
+    	<strong>User: </strong>{{clothing.user.nickName}}
+    </div>
+     <div id='photo'>
+     	<img src={{MEDIA_URL}}{{clothing.photo}}>
+    </div>
+ </section>
+  
+
+
+{% endblock %}
+
+

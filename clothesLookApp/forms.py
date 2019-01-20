@@ -123,19 +123,11 @@ class UserCreateFormAdmin(UserCreationForm):
                 self.add_error('year_birth', _('Can´t be in future'))
 
 
-class createClothe(forms.ModelForm):
+class createClothing(forms.ModelForm):
     class Meta:
         model = Clothing
 
-        fields = [
-            'name',
-            'photo',
-            'size',
-            'brand',
-            'link',
-            'user',
-            'category',
-        ]
+        fields = ['name','photo','size','brand', 'link','user','category',]
 
         labels = {
             'name': 'Name',
@@ -148,7 +140,7 @@ class createClothe(forms.ModelForm):
         }
 
         widgets = {
-             'name': forms.TextInput(attrs={'class':'form-control'}),
+            'name': forms.TextInput(attrs={'class':'form-control'}),
             'photo': forms.TextInput(attrs={'class':'form-control'}),
             'size': forms.TextInput(attrs={'class':'form-control'}),
             'brand': forms.TextInput(attrs={'class':'form-control'}),
@@ -157,24 +149,6 @@ class createClothe(forms.ModelForm):
             'category': forms.Select(attrs={'class':'form-control'}),
             }
         
-class filtrarCategory(forms.ModelForm):
-    class Meta:
-        model = Category
-
-        fields = [
-            'name',
-        ]
-
-        labels = {
-            'name': 'Name',
-        }
-
-        widgets = {
-            'name': forms.Select(attrs={'class':'form-control'}),
-            }
-
-
-
 class createLook(forms.ModelForm):
     class Meta:
         model = Look
