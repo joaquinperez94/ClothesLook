@@ -13,5 +13,10 @@
     <strong>Sex: </strong>{{ user.sex }}
     <br>
     <strong>Is staff: </strong>{{ user.is_staff }}
+     <br>
+      <br>
+
+      <a   href='edit_user/{{user.id}}'>Edit profile</a>
+      <a   href='delete_user/{{user.id}}'>Delete profile</a>
 
 {% endblock %}

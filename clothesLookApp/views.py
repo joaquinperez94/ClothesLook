@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from .forms import UserCreateForm
+from .forms import UserCreateForm,UserChangeForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from clothesLookApp.forms import registrerClote
 from django.http.response import HttpResponseRedirect
@@ -46,7 +46,30 @@ def profile(request):
     if request.user.is_authenticated:
         user = request.user
         return render(request, 'profile.html', {"user": user})
-    
+
+def delete_user(request, id_user):
+    User = get_user_model()
+    user = User.objects.get(id=id_user)
+    if request.method == "POST":
+        user.delete()
+        return render(request, 'inicio.html')
+    context = {
+        "User": user
+    }
+    return render(request, "user_delete.html", context)
+
+def edit_user(request,id_user):
+    User = get_user_model()
+    user=User.objects.get(id=id_user)
+    if request.method == 'GET':
+        form=UserChangeForm(instance=user)
+    else:
+        form=UserChangeForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+        return render(request, 'profile.html', {"user": user})
+    return render(request, 'edit_user.html', {'form': form})
+
 
 #PAGINA DE REGISTRO
 def signup(request):
