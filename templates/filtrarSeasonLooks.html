@@ -1,0 +1,20 @@
+{% extends 'banner.html' %}
+
+{% block contenido %}
+<form method = "post">
+{% csrf_token %}
+<select name = "season" >
+
+
+
+{{ athlete_list|length }}
+    <option value="Verano" />Verano</option>
+    <option value="Primavera" />Primavera</option>
+    <option value="Otoño" />Otoño</option>
+    <option value="Invierno" />Invierno</option>
+</select>
+
+<input  type = "submit" value="Submit">
+</form>
+{% endblock %}
+

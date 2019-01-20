@@ -57,7 +57,7 @@ def filtrar_category_prenda(request):
     else:
         categorias = Category.objects.all()
         return render(request,'filtrarCategoriaPrendas.html', {'categorias':categorias,'MEDIA_URL': settings.MEDIA_URL})
- 
+
 # 
 # def filtrar_category_prenda(categoriaSelect):
 #     prendas=Clothing.objects.all();
@@ -96,6 +96,15 @@ def lista_looks_usuario(request):
 def mostrar_look(request, id_look):
     look = get_object_or_404(Look, pk=id_look)
     return render(request,'mostrarLook.html',{'look':look,'MEDIA_URL': settings.MEDIA_URL})
+
+def filtrar_season_look(request):
+    if request.method=='POST':
+        seasonSelect = request.POST['season']
+        looks=Look.objects.filter(season  = seasonSelect)
+        return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
+    else:
+        return render(request,'filtrarSeasonLooks.html', {'MEDIA_URL': settings.MEDIA_URL})
+
 
 
 

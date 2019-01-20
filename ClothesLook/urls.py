@@ -31,6 +31,7 @@ urlpatterns = [
     path('looks/list', views.lista_looks,name='looks'),
     path('looks/listUser', views.lista_looks_usuario,name='looksUsuario'),
     path('looks/create', views.looks_create,name='Crear Looks'),
+    path('looks/filtrarSeason', views.filtrar_season_look, name='Filtrar looks por temporada'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
 
     path('signup/', views.signup, name='signup'),
