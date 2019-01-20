@@ -19,6 +19,7 @@ from clothesLookApp import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('', views.inicio,name='inicio'),
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio,name='inicio'),
 
@@ -34,6 +35,9 @@ urlpatterns = [
     path('looks/filtrarSeason', views.filtrar_season_look, name='Filtrar looks por temporada'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
 
+    re_path(r'edit_user/(?P<id_user>\d+)',views.edit_user),
+    re_path(r'delete_user/(?P<id_user>\d+)',views.delete_user),
+    path('looks/', views.inicio),
     path('signup/', views.signup, name='signup'),
     path('profile/', views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view()),

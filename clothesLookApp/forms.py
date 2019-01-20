@@ -4,14 +4,13 @@ from clothesLookApp.models import Clothing, Look, Category
 from dataclasses import fields
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django.utils.translation import ugettext_lazy as _
 import datetime
 import pytz
 from django.utils import timezone
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-# from nocaptcha_recaptcha.fields import NoReCaptchaField
 
 User = get_user_model()
 
@@ -67,18 +66,14 @@ class UserCreateForm(UserCreationForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField()
-
     class Meta:
         model = User
-        fields = ('nickName', 'password', 'year_birth', 'is_active')
+        fields = ('nickName','first_name','last_name','sex','year_birth')
 
     def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
         return self.initial["password"]
 
-
-# Formulario sin el campo "captcha" necesario para crear el User desde el panel de administracion
+#PARA EL MÉTODO CREATESUPERUSER
 class UserCreateFormAdmin(UserCreationForm):
     SEX_OPTIONS = (
         ('M', _('Man')),
@@ -89,8 +84,7 @@ class UserCreateFormAdmin(UserCreationForm):
     first_name = forms.CharField(label=_('First name'), required=False)
     last_name = forms.CharField(label=_('Last name'), required=False)
     nickName = forms.EmailField(label=_('Email'), required=True)
-    year_birth = forms.DateTimeField(label=_('Year of Birth'), input_formats=['%d/%m/%Y'], help_text=formato,
-                                     required=False)
+    year_birth = forms.DateTimeField(label=_('Year of Birth'), input_formats=['%d/%m/%Y'], help_text=formato,required=False)
     sex = forms.ChoiceField(label=_('Sex'), choices=SEX_OPTIONS, required=False)
 
     class Meta:
@@ -109,7 +103,6 @@ class UserCreateFormAdmin(UserCreationForm):
             user.save()
         return user
 
-    #  validations
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(UserCreateFormAdmin, self).clean(*args, **kwargs)
@@ -119,7 +112,7 @@ class UserCreateFormAdmin(UserCreationForm):
 
             for u in all_users:
                 if nickName == u.nickName:
-                    self.add_error('nickName', _('Email alredy exits'))
+                    self.add_error('nickName', _('Nickname exit'))
                     break
 
         year_birth = cleaned_data.get('year_birth', None)
