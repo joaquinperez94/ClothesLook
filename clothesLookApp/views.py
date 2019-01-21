@@ -99,6 +99,7 @@ def looks_create(request):
                 return redirect('/looks/listUser')
         else:
             form = createLook()
+            form.fields['clothes'].queryset = Clothing.objects.filter(user=user)
     return render(request, 'looks.html',{'form':form})
 
 def lista_looks(request):
