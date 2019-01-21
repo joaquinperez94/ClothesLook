@@ -35,7 +35,7 @@ th, td {
 			<td>{{look.season}}</td>
 			<td>{{look.user}}</td>
 			<td>{% for clothing in look.clothes.all %}
-             <li> <a href='mostrarPrenda/{{clothing.id}}'>{{clothing.name}}</a> </li>
+             <li> <a href='display/{{clothing.id}}'>{{clothing.name}}</a> </li>
             {% endfor %}</td>
 			<td><a href='mostrarLook/{{look.id}}'>Ver {{look.title}}</a></td>
 		</tr>
