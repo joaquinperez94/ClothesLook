@@ -36,6 +36,8 @@ urlpatterns = [
     path('looks/create', views.looks_create,name='Crear Looks'),
     path('looks/filtrarSeason', views.filtrar_season_look, name='Filtrar looks por temporada'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
+    
+    re_path(r'commentCreate/(?P<id_look>\d+)',views.comment_create),
 
     re_path(r'edit_user/(?P<id_user>\d+)',views.edit_user),
     re_path(r'delete_user/(?P<id_user>\d+)',views.delete_user),

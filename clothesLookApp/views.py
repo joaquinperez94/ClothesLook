@@ -5,10 +5,10 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from clothesLookApp.forms import ClothingForm, createLook
+from clothesLookApp.forms import ClothingForm, createLook, CommentForm
 #from clothesLookApp.forms import  registrerLook
 from django.http.response import HttpResponseRedirect
-from clothesLookApp.models import Clothing, Look, User, Category
+from clothesLookApp.models import Clothing, Look, User, Category, Comment
 from django.conf import settings
 
 # Create your views here.
@@ -23,8 +23,10 @@ def clothing_create(request):
         user = request.user   
         if request.method=='POST':
             form = ClothingForm(request.POST)
-            if form.is_valid():   
-                form.save()         
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user = user  
+                obj.save()         
                 return redirect('/clothing/listUser')
         else:
             form = ClothingForm()
@@ -96,8 +98,9 @@ def lista_looks_usuario(request):
     return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
 
 def mostrar_look(request, id_look):
-    look = get_object_or_404(Look, pk=id_look)
-    return render(request,'mostrarLook.html',{'look':look,'MEDIA_URL': settings.MEDIA_URL})
+    look1 = get_object_or_404(Look, pk=id_look)
+    comments = Comment.objects.filter(look = look1)
+    return render(request,'mostrarLook.html',{'look':look1,'comments':comments,'MEDIA_URL': settings.MEDIA_URL})
 
 def filtrar_season_look(request):
     if request.method=='POST':
@@ -106,9 +109,6 @@ def filtrar_season_look(request):
         return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
     else:
         return render(request,'filtrarSeasonLooks.html', {'MEDIA_URL': settings.MEDIA_URL})
-
-
-
 
 #PAGINA DE PROFILE
 def profile(request):
@@ -154,3 +154,22 @@ def signup(request):
     else:
         form = UserCreateForm()
     return render(request, 'signup.html', {'form': form})
+
+
+#PAGINA DE COMENTARIOS 
+def comment_create(request,id_look):     
+    if request.user.is_authenticated:
+        user = request.user   
+        if request.method=='POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user = user
+                look = Look.objects.get(id=id_look)  
+                obj.look = look 
+                obj.save()         
+                return redirect('../../../looks/list')
+        else:
+            form = CommentForm()
+            return render(request, 'comment_create.html',{'form':form})
+    

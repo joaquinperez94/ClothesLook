@@ -1,5 +1,19 @@
 {% extends 'banner.html' %}
 
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;    
+}
+</style>
+</head>
+
+
 {% block contenido %}
 <style>
 table, th, td {
@@ -47,6 +61,38 @@ th, td {
          </table>
     </div>
  </section>
+ 
+<fieldset>
+    <legend>Comments:</legend>
+    <table class = "table:table-bordered"
+	<thead>
+		<tr>
+			<td><strong>Subject</strong></td>
+			<td><strong>Body</strong></td>
+			<td><strong>Moment</strong></td>
+			<td><strong>User</strong></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for comment in comments%}
+		<tr>
+			<td>{{comment.subject}}</td>
+			<td>{{comment.body}}</td>
+			<td>{{comment.moment}}</td>	
+			<td>{{comment.user}}</td>		
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+    {% if user.is_authenticated %}
+<div id='commentCreate'>
+			<td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
+	 </div>
+{% endif %}
+  </fieldset>
+   
+
 
 {% endblock %}
 
