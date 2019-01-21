@@ -12,6 +12,8 @@
     	<strong>Usuario: </strong>{{look.user.nickName}}
     </div>
     <br>
+     
+{% if look.clothes.all %}
     <div id='clothes'>
         <legend>Clothes: </legend>
         <table class="table">
@@ -37,8 +39,12 @@
 
          </table>
     </div>
+    {% endif %}
  </section>
  <br>
+ 
+ 
+{% if comments %}
 <fieldset>
     <legend>Comments:</legend>
     <table class="table">
@@ -62,6 +68,7 @@
 		{% endfor %}
 	</tbody>
 </table>
+
     {% if user.is_authenticated %}
 <div id='commentCreate'>
     <td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
@@ -69,7 +76,7 @@
 {% endif %}
   </fieldset>
    
-
+{% endif %}
 
 {% endblock %}
 

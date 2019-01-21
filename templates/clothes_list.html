@@ -24,8 +24,10 @@ th, td {
 			<td><strong>User</strong></td>
 			<td><strong>Category</strong></td>
 			<td></td>
+			{% if user.is_authenticated %}
 			<td></td>
 			<td></td>
+			{% endif %}
 		</tr>
 	</thead>
 	
