@@ -15,7 +15,16 @@ th, td {
 
 
 {% block contenido %}
-   <section>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
     <h2>{{look.title}}</h2>
     <div id='description'>
     	<strong>Descripcion: </strong>{{look.description}}
@@ -27,7 +36,31 @@ th, td {
     	<strong>Usuario: </strong>{{look.user.nickName}}
     </div>
     <div id='clothes'>
-        <strong>Usuario: </strong><a href='mostrarPrenda/{{look.clothes.id}}'>{{look.clothes.name}}</a>
+        <h2>Clothes: </h2>
+
+        <table class = "table:table-bordered">
+
+        <tr>
+            <th><strong> Name </strong></th>
+            <th><strong> Photo </strong></th>
+            <th><strong> Size </strong></th>
+            <th><strong> Brand </strong></th>
+            <th><strong> Link </strong></th>
+            <th><strong> Category </strong></th>
+        </tr>
+        {% for clothing in look.clothes.all %}
+        <tr>
+            <th>{{clothing.name}}</th>
+            <th><img src={{MEDIA_URL}}{{clothing.photo}}></th>
+            <th>{{clothing.size}}</th>
+            <th>{{clothing.brand}}</th>
+            <th><a href="{{clothing.link}}">clothing link</a></th>
+            <th>{{clothing.category}}</th>
+        </tr>
+         {% endfor %}
+
+
+         </table>
     </div>
  </section>
  
