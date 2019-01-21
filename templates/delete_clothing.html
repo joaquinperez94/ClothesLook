@@ -4,8 +4,6 @@
 
 <form method='POST'>{% csrf_token %}
     <h1>Do you want to delete clothing {{ clothing.name }}?</h1>
-    <button class="btm btn-danger" type="submit">Yes</button>
-    <a href='../list'>Cancel</a></p>
-
+    <p><input class="btm btn-danger" type='submit' value='Yes' />  <input type="button" value="No"  onclick="window.location='../list'"></input></p>
 </form>
 {% endblock %}
