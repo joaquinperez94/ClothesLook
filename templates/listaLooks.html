@@ -15,6 +15,14 @@ th, td {
 </style>
 </head>
 
+   Pages: {% for l in  looks.paginator.page_range %}
+
+        {% if forloop.counter < 5 %}
+            <a href="?page={{forloop.counter}}">{{forloop.counter}}</a>,
+        {% endif %}
+      {% endfor %}
+      <br>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -42,6 +50,8 @@ th, td {
 		{% endfor %}
 	</tbody>
 </table>
+
+
 
 {% if user.is_authenticated %}
  	<h7><a href='create'>Crear nuevos looks</a><br></h7>

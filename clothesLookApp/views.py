@@ -10,6 +10,7 @@ from clothesLookApp.forms import ClothingForm, createLook, CommentForm
 from django.http.response import HttpResponseRedirect
 from clothesLookApp.models import Clothing, Look, User, Category, Comment
 from django.conf import settings
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -91,7 +92,11 @@ def looks_create(request):
 
 def lista_looks(request):
     looks=Look.objects.all()
-    return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
+    paginator= Paginator(looks,5)
+    page=request.GET.get('page')
+    looks=paginator.get_page(page)
+
+    return render(request,'listaLooks.html', {'looks':looks,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
 def lista_looks_usuario(request):
     looks=Look.objects.filter(user = request.user)
