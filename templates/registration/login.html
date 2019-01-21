@@ -1,10 +1,12 @@
 {% extends "banner.html" %}
 {% block contenido %}
-
-    <h2>Login</h2>
+<section>
+    <h2 class="nav justify-content-center">Login</h2>
+    <br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Log in</button>
     </form>
+</section>
 {% endblock %}

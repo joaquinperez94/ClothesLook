@@ -1,16 +1,14 @@
 {% extends 'banner.html' %}
-
 {% block contenido %}
-  <h2>Sign up</h2>
+<section>
+  <h2 class="nav justify-content-center">Sign up</h2>
+  <br>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
@@ -18,4 +16,5 @@
     {% endfor %}
     <button type="submit">Sign up</button>
   </form>
+</section>
 {% endblock %}
