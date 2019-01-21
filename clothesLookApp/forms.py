@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-from clothesLookApp.models import Clothing, Look, Category,Comment
+from clothesLookApp.models import Clothing, Look, Category
 from dataclasses import fields
 from django import forms
 from django.contrib.auth import get_user_model
@@ -126,8 +126,8 @@ class UserCreateFormAdmin(UserCreationForm):
 class ClothingForm(forms.ModelForm):
     class Meta:
         model = Clothing
-        exclude = {'user',}
-        fields = ['name','photo','size','brand', 'link','category',]
+
+        fields = ['name','photo','size','brand', 'link','user','category',]
 
         labels = {
             'name': 'Name',
@@ -135,6 +135,7 @@ class ClothingForm(forms.ModelForm):
             'size': 'Size',
             'brand': 'Brand',
             'link': 'Link',
+            'user': 'User',
             'category': 'Category',
         }
 
@@ -144,24 +145,8 @@ class ClothingForm(forms.ModelForm):
             'size': forms.TextInput(attrs={'class':'form-control'}),
             'brand': forms.TextInput(attrs={'class':'form-control'}),
             'link': forms.TextInput(attrs={'class':'form-control'}),
+            'user': forms.Select(attrs={'class':'form-control'}),
             'category': forms.Select(attrs={'class':'form-control'}),
-            }
-        
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        exclude = {'user','look','moment',}
-        fields = ['subject','body',]
-
-        labels = {
-            'subject': 'Subject',
-            'body': 'Body',
-            'moment': 'Moment',
-        }
-
-        widgets = {
-            'subject': forms.TextInput(attrs={'class':'form-control'}),
-            'body': forms.TextInput(attrs={'class':'form-control'}),
             }
         
 class createLook(forms.ModelForm):
