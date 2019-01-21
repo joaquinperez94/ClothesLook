@@ -178,12 +178,11 @@ class filtrarCategory(forms.ModelForm):
 class createLook(forms.ModelForm):
     class Meta:
         model = Look
-
+        exclude= ('user',)
         fields = [
             'title',
             'description',
             'season',
-            'user',
             'clothes',
         ]
 
@@ -191,7 +190,6 @@ class createLook(forms.ModelForm):
             'title': 'Title',
             'description': 'Description',
             'season': 'Season',
-            'user': 'User',
             'clothes': 'Clothes',
         }
 
@@ -199,6 +197,5 @@ class createLook(forms.ModelForm):
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'description': forms.TextInput(attrs={'class':'form-control'}),
             'season': forms.Select(attrs={'class':'form-control'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
-            'clothes': forms.Select(attrs={'class':'form-control'}),
+            'clothes': forms.SelectMultiple(attrs={'class':'form-control'}),
             }

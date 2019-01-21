@@ -72,6 +72,7 @@ def filtrar_category_prenda(request):
 #         
 #         
 
+
 #PAGINA DE LOOKS
 def looks_create(request):
     if request.user.is_authenticated:
@@ -79,11 +80,13 @@ def looks_create(request):
         if request.method=='POST':
             form = createLook(request.POST)
             if form.is_valid():
-                form.save()
+                obj=form.save(commit=False)
+                obj.user=user
+                obj.save()
                 return redirect('/looks/listUser')
         else:
             form = createLook()
-            return render(request, 'looks.html',{'form':form})
+    return render(request, 'looks.html',{'form':form})
 
 def lista_looks(request):
     looks=Look.objects.all()
