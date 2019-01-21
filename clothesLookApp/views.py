@@ -80,9 +80,12 @@ def looks_create(request):
         if request.method=='POST':
             form = createLook(request.POST)
             if form.is_valid():
+                clothes=form.cleaned_data.get('clothes')
                 obj=form.save(commit=False)
                 obj.user=user
                 obj.save()
+                for clothe in clothes:
+                    obj.clothes.add(clothe.id)
                 return redirect('/looks/listUser')
         else:
             form = createLook()
