@@ -1,38 +1,50 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang='es'>
 	<head>
-		<meta charset="utf-8">
-		<h1>ClothesApp</h1>
-		<style>
-			{% block style_css %}{% endblock %}
-		</style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<header>
 			{% block encabezado %}{% endblock %}
-			<nav>
-				<ul>
-                    <li><a href='/inicio'>Inicio</a></li>
-                    <li><a href='/clothing/list'>Clothing</a></li>            
-			        <li><a href='/looks/list'>Looks</a></li>
-                    <li>------------------------------</li>
+            <br>
+            <div class="nav justify-content-center">
+                <h1>ClothesApp</h1>
+            </div>
+            <div class="nav justify-content-center">
+				<ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href='/inicio'>Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/clothing/list'>Prendas</a></li>
+			        <li class="nav-item"><a class="nav-link" href='/looks/list'>Looks</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href='/logout'>Log out</a></li>
-                    <li><a href='/profile'>My profile</a></li>                    
-                    <li><a href='/clothing/listUser'>Mis prendas</a></li>
-					<li><a href='/looks/listUser'>Mis looks</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/logout'>Log out</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/profile'>My profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/clothing/listUser'>Mis prendas</a></li>
+					<li class="nav-item"><a class="nav-link" href='/looks/listUser'>Mis looks</a></li>
                     {% else %}
-                    <li><a href='/login'>Login</a></li>
-                    <li><a href='/signup'>Signup</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/login'>Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/signup'>Signup</a></li>
                     {% endif %}
-                  				</ul>
-			</nav>
-			<hr>
+                </ul>
+            </div>
+			<br>
 		</header>
-		<section class='contenido'>
-			{% block contenido %}{% endblock %}
-		</section>
-		<footer>
+
+        <div class="nav justify-content-center">
+		    <section class='contenido'>
+			    {% block contenido %}{% endblock %}
+		    </section>
+        </div>
+
+		<br>
+		<br>
+		<br>
+		<footer class="nav justify-content-center">
 			<p>Proyecto para la Universidad de Sevilla</p>
 		</footer>
 	</body>
