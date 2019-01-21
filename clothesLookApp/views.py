@@ -23,14 +23,14 @@ def clothing_create(request):
         user = request.user   
         if request.method=='POST':
             form = ClothingForm(request.POST)
-            if form.is_valid():
+            if form.is_valid():   
                 obj = form.save(commit=False)
                 obj.user = user  
                 obj.save()         
                 return redirect('/clothing/listUser')
         else:
             form = ClothingForm()
-            return render(request, 'clothing_create.html',{'form':form})
+    return render(request, 'clothing_create.html',{'form':form})
     
 def clothes_list(request):
     clothes=Clothing.objects.all()
@@ -70,9 +70,6 @@ def edit_clothing(request,id_clothing):
             form.save()
         return redirect('../../../clothing/list')
     return render(request, 'clothing_create.html', {'form': form})
-
-
-
 
 #PAGINA DE LOOKS
 def looks_create(request):
@@ -171,5 +168,4 @@ def comment_create(request,id_look):
                 return redirect('../../../looks/list')
         else:
             form = CommentForm()
-            return render(request, 'comment_create.html',{'form':form})
-    
+    return render(request, 'comment_create.html',{'form':form})

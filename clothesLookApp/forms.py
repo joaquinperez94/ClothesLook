@@ -188,3 +188,5 @@ class createLook(forms.ModelForm):
             'season': forms.Select(attrs={'class':'form-control'}),
             'clothes': forms.SelectMultiple(attrs={'class':'form-control'}),
             }
+        
+
