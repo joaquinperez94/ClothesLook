@@ -15,12 +15,13 @@ th, td {
 </style>
 </head>
 
-   Pages: {% for l in  looks.paginator.page_range %}
+   Pages:
 
-        {% if forloop.counter < 5 %}
-            <a href="?page={{forloop.counter}}">{{forloop.counter}}</a>,
-        {% endif %}
-      {% endfor %}
+{% for l in  looks.paginator.page_range %}
+    {% if forloop.counter < 5 %}
+        <a href="?page={{forloop.counter}}">{{forloop.counter}}</a>,
+    {% endif %}
+{% endfor %}
       <br>
 
 <table class="table">
@@ -50,6 +51,7 @@ th, td {
 		{% endfor %}
 	</tbody>
 </table>
+
 
 
 

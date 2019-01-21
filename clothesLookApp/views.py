@@ -35,11 +35,22 @@ def clothing_create(request):
     
 def clothes_list(request):
     clothes=Clothing.objects.all()
-    return render(request,'clothes_list.html', {'clothes':clothes,'MEDIA_URL': settings.MEDIA_URL})
+
+    paginator= Paginator(clothes,5)
+    page=request.GET.get('page')
+    # ?page=2
+    clothes=paginator.get_page(page)
+
+    return render(request,'clothes_list.html', {'clothes':clothes,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
 def clothes_list_user(request):
     clothes = Clothing.objects.filter(user = request.user)
-    return render(request,'clothes_list.html', {'clothes':clothes,'MEDIA_URL': settings.MEDIA_URL})  
+    paginator = Paginator(clothes, 5)
+    page = request.GET.get('page')
+    # ?page=2
+    clothes = paginator.get_page(page)
+
+    return render(request,'clothes_list.html', {'clothes':clothes,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
 def display_clothing(request, id_clothing):
     clothing = get_object_or_404(Clothing, pk=id_clothing)
@@ -100,7 +111,11 @@ def lista_looks(request):
 
 def lista_looks_usuario(request):
     looks=Look.objects.filter(user = request.user)
-    return render(request,'listaLooks.html', {'looks':looks,'MEDIA_URL': settings.MEDIA_URL})
+    paginator= Paginator(looks,5)
+    page=request.GET.get('page')
+    # ?page=2
+    looks=paginator.get_page(page)
+    return render(request,'listaLooks.html', {'looks':looks,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
 def mostrar_look(request, id_look):
     look1 = get_object_or_404(Look, pk=id_look)
