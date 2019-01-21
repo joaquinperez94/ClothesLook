@@ -1,18 +1,6 @@
 {% extends 'banner.html' %}
-
-
-
 {% block contenido %}
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;
-}
-</style>
+<section>
     <h2>{{look.title}}</h2>
     <div id='description'>
     	<strong>Descripcion: </strong>{{look.description}}
@@ -23,11 +11,10 @@ th, td {
     <div id='user'>
     	<strong>Usuario: </strong>{{look.user.nickName}}
     </div>
+    <br>
     <div id='clothes'>
-        <h2>Clothes: </h2>
-
-        <table class = "table:table-bordered">
-
+        <legend>Clothes: </legend>
+        <table class="table">
         <tr>
             <th><strong> Name </strong></th>
             <th><strong> Photo </strong></th>
@@ -39,7 +26,7 @@ th, td {
         {% for clothing in look.clothes.all %}
         <tr>
             <th>{{clothing.name}}</th>
-            <th><img src={{MEDIA_URL}}{{clothing.photo}}></th>
+            <th><img src={{MEDIA_URL}}{{clothing.photo}} style="width:90px;"></th>
             <th>{{clothing.size}}</th>
             <th>{{clothing.brand}}</th>
             <th><a href="{{clothing.link}}">Link to clothing</a></th>
@@ -51,10 +38,10 @@ th, td {
          </table>
     </div>
  </section>
- 
+ <br>
 <fieldset>
     <legend>Comments:</legend>
-    <table class = "table:table-bordered"
+    <table class="table">
 	<thead>
 		<tr>
 			<td><strong>Subject</strong></td>
@@ -77,8 +64,8 @@ th, td {
 </table>
     {% if user.is_authenticated %}
 <div id='commentCreate'>
-			<td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
-	 </div>
+    <td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
+</div>
 {% endif %}
   </fieldset>
    
