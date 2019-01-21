@@ -1,7 +1,7 @@
 {% extends 'banner.html' %}
-
 {% block contenido %}
-    <h3>My Profile</h3>
+    <h2>My Profile</h2>
+    <br>
     <strong>Nickname: </strong>{{ user.nickName }}
     <br>
     <strong>First name: </strong>{{ user.first_name }}
@@ -16,7 +16,7 @@
      <br>
       <br>
 
-      <a   href='edit_user/{{user.id}}'>Edit profile</a>
-      <a   href='delete_user/{{user.id}}'>Delete profile</a>
+      <h7><a   href='edit_user/{{user.id}}'>Edit profile</a><br></h7>
+      <h7><a   href='delete_user/{{user.id}}'>Delete profile</a><br></h7>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
-from clothesLookApp.models import Clothing, Look, Category
+from clothesLookApp.models import Clothing, Look, Category,Comment
 from dataclasses import fields
 from django import forms
 from django.contrib.auth import get_user_model
@@ -123,19 +123,11 @@ class UserCreateFormAdmin(UserCreationForm):
                 self.add_error('year_birth', _('Can´t be in future'))
 
 
-class createClothe(forms.ModelForm):
+class ClothingForm(forms.ModelForm):
     class Meta:
         model = Clothing
-
-        fields = [
-            'name',
-            'photo',
-            'size',
-            'brand',
-            'link',
-            'user',
-            'category',
-        ]
+        exclude = {'user',}
+        fields = ['name','photo','size','brand', 'link','category',]
 
         labels = {
             'name': 'Name',
@@ -143,38 +135,35 @@ class createClothe(forms.ModelForm):
             'size': 'Size',
             'brand': 'Brand',
             'link': 'Link',
-            'user': 'User',
             'category': 'Category',
         }
 
         widgets = {
-             'name': forms.TextInput(attrs={'class':'form-control'}),
+            'name': forms.TextInput(attrs={'class':'form-control'}),
             'photo': forms.TextInput(attrs={'class':'form-control'}),
             'size': forms.TextInput(attrs={'class':'form-control'}),
             'brand': forms.TextInput(attrs={'class':'form-control'}),
             'link': forms.TextInput(attrs={'class':'form-control'}),
-            'user': forms.Select(attrs={'class':'form-control'}),
             'category': forms.Select(attrs={'class':'form-control'}),
             }
         
-class filtrarCategory(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = Category
-
-        fields = [
-            'name',
-        ]
+        model = Comment
+        exclude = {'user','look','moment',}
+        fields = ['subject','body',]
 
         labels = {
-            'name': 'Name',
+            'subject': 'Subject',
+            'body': 'Body',
+            'moment': 'Moment',
         }
 
         widgets = {
-            'name': forms.Select(attrs={'class':'form-control'}),
+            'subject': forms.TextInput(attrs={'class':'form-control'}),
+            'body': forms.TextInput(attrs={'class':'form-control'}),
             }
-
-
-
+        
 class createLook(forms.ModelForm):
     class Meta:
         model = Look
@@ -199,3 +188,5 @@ class createLook(forms.ModelForm):
             'season': forms.Select(attrs={'class':'form-control'}),
             'clothes': forms.SelectMultiple(attrs={'class':'form-control'}),
             }
+        
+

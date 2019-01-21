@@ -1,7 +1,6 @@
 {% extends 'banner.html' %}
-
 {% block contenido %}
-   <section>
+<section>
     <h2>{{look.title}}</h2>
     <div id='description'>
     	<strong>Descripcion: </strong>{{look.description}}
@@ -12,10 +11,65 @@
     <div id='user'>
     	<strong>Usuario: </strong>{{look.user.nickName}}
     </div>
+    <br>
     <div id='clothes'>
-        <strong>Usuario: </strong><a href='mostrarPrenda/{{look.clothes.id}}'>{{look.clothes.name}}</a>
+        <legend>Clothes: </legend>
+        <table class="table">
+        <tr>
+            <th><strong> Name </strong></th>
+            <th><strong> Photo </strong></th>
+            <th><strong> Size </strong></th>
+            <th><strong> Brand </strong></th>
+            <th><strong> Link </strong></th>
+            <th><strong> Category </strong></th>
+        </tr>
+        {% for clothing in look.clothes.all %}
+        <tr>
+            <th>{{clothing.name}}</th>
+            <th><img src={{MEDIA_URL}}{{clothing.photo}} style="width:90px;"></th>
+            <th>{{clothing.size}}</th>
+            <th>{{clothing.brand}}</th>
+            <th><a href="{{clothing.link}}">Link to clothing</a></th>
+            <th>{{clothing.category}}</th>
+        </tr>
+         {% endfor %}
+
+
+         </table>
     </div>
  </section>
+ <br>
+<fieldset>
+    <legend>Comments:</legend>
+    <table class="table">
+	<thead>
+		<tr>
+			<td><strong>Subject</strong></td>
+			<td><strong>Body</strong></td>
+			<td><strong>Moment</strong></td>
+			<td><strong>User</strong></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for comment in comments%}
+		<tr>
+			<td>{{comment.subject}}</td>
+			<td>{{comment.body}}</td>
+			<td>{{comment.moment}}</td>	
+			<td>{{comment.user}}</td>		
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+    {% if user.is_authenticated %}
+<div id='commentCreate'>
+    <td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
+</div>
+{% endif %}
+  </fieldset>
+   
+
 
 {% endblock %}
 

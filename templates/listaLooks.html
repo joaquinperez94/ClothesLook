@@ -15,14 +15,14 @@ th, td {
 </style>
 </head>
 
-<table class = "table:table-bordered"
+<table class="table">
 	<thead>
 		<tr>
-			<td><strong>Titulo</strong></td>
-			<td><strong>Descripcion</strong></td>
-			<td><strong>Temporada</strong></td>
-			<td><strong>Usuario</strong></td>
-			<td><strong>Prendas</strong></td>
+			<td><strong>Title</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Season</strong></td>
+			<td><strong>User</strong></td>
+			<td><strong>Clothes</strong></td>
 			<td></td>
 		</tr>
 	</thead>
@@ -35,7 +35,7 @@ th, td {
 			<td>{{look.season}}</td>
 			<td>{{look.user}}</td>
 			<td>{% for clothing in look.clothes.all %}
-             <li> <a href='mostrarPrenda/{{clothing.id}}'>{{clothing.name}}</a> </li>
+             <li> <a href='display/{{clothing.id}}'>{{clothing.name}}</a> </li>
             {% endfor %}</td>
 			<td><a href='mostrarLook/{{look.id}}'>Ver {{look.title}}</a></td>
 		</tr>
@@ -44,10 +44,10 @@ th, td {
 </table>
 
 {% if user.is_authenticated %}
- 	<h4><a href='create'>Crear nuevos looks</a><br></h4>
+ 	<h7><a href='create'>Crear nuevos looks</a><br></h7>
 {% endif %}
 
-<h4><a href='filtrarSeason'>Filtrar</a><br></h4>
+<h7><a href='filtrarSeason'>Filtrar</a><br></h7>
 
 {% endblock %}
 

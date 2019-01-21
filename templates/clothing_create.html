@@ -1,10 +1,10 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-	<h2>CREA TUS PRENDAS</h2>
+	<h2>CREATE YOUR CLOTHING</h2>
    <form method='POST'>{% csrf_token %}
 {{form.as_p}}
-<button type='submit'>Guardar</button>
+<button type='submit'>Save</button>
 </form>
 {% endblock %}
 

@@ -23,17 +23,21 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.inicio,name='inicio'),
 
-    path('prendas/list', views.lista_prendas,name='prendas'),
-    path('prendas/listUser', views.lista_prendas_usuario,name='prendasUsuario'),
-    path('prendas/create', views.prendas_create,name='Crear prendas'),
-    path('prendas/filtrarCategory', views.filtrar_category_prenda , name='Filtrar prendas por categoria'),
-    re_path(r'mostrarPrenda/(?P<id_prenda>\d+)',views.mostrar_prenda),
+    path('clothing/list', views.clothes_list,name='clothing'),
+    path('clothing/listUser', views.clothes_list_user,name='clothingUser'),
+    path('clothing/create', views.clothing_create,name='Create clothing'),
+    path('clothing/filterCategory', views.filter_category_clothing , name='Filter clothing per category'),
+    re_path(r'display/(?P<id_clothing>\d+)',views.display_clothing),
+    re_path(r'edit/(?P<id_clothing>\d+)',views.edit_clothing),
+    re_path(r'delete/(?P<id_clothing>\d+)',views.delete_clothing),
 
     path('looks/list', views.lista_looks,name='looks'),
     path('looks/listUser', views.lista_looks_usuario,name='looksUsuario'),
     path('looks/create', views.looks_create,name='Crear Looks'),
     path('looks/filtrarSeason', views.filtrar_season_look, name='Filtrar looks por temporada'),
     re_path(r'mostrarLook/(?P<id_look>\d+)',views.mostrar_look),
+    
+    re_path(r'commentCreate/(?P<id_look>\d+)',views.comment_create),
 
     re_path(r'edit_user/(?P<id_user>\d+)',views.edit_user),
     re_path(r'delete_user/(?P<id_user>\d+)',views.delete_user),
