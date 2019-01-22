@@ -1,7 +1,9 @@
 {% extends 'banner.html' %}
 {% block contenido %}
+<h2 class="nav justify-content-center">Display look</h2>
+<br>
 <section>
-    <h2>{{look.title}}</h2>
+    <h4>{{look.title}}</h4>
     <div id='description'>
     	<strong>Descripcion: </strong>{{look.description}}
     </div>
@@ -46,7 +48,7 @@
  
 {% if comments %}
 <fieldset>
-    <legend>Comments:</legend>
+    <legend><h2>Comments:</h2></legend>
     <table class="table">
 	<thead>
 		<tr>
@@ -71,7 +73,7 @@
 {% endif %}
     {% if user.is_authenticated %}
 <div id='commentCreate'>
-    <td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
+    <input   class="btn btn-info btn-sm" type="button" value="Comment this look" onclick="window.location='commentCreate/{{look.id}}'"></input>
 </div>
 {% endif %}
   </fieldset>
