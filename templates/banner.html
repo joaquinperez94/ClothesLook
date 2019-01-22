@@ -13,10 +13,11 @@
 		<header>
 			{% block encabezado %}{% endblock %}
             <br>
-            <div class="p-3 mb-2 bg-info text-white">
+            <div class="p-3 mb-2 bg-info text-light">
             <div class="nav justify-content-center">
                 <h1>ClothesApp</h1>
             </div></div>
+            <div class="p-3 mb-2 bg-light">
             <div class="nav justify-content-center">
 				<ul class="nav">
                     <li class="nav-item"><a class="nav-link" href='/inicio'>Inicio</a></li>
@@ -32,11 +33,12 @@
                     <li class="nav-item"><a class="nav-link" href='/signup'>Signup</a></li>
                     {% endif %}
                 </ul>
-            </div>
-			<br>
+            </div></div>
 		</header>
 
+
         <div class="nav justify-content-center">
+		<br>
 		    <section class='contenido'>
 			    {% block contenido %}{% endblock %}
 		    </section>
