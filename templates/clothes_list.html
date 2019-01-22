@@ -12,21 +12,31 @@ th, td {
   padding: 5px;
   text-align: left;    
 }
+
 </style>
+<h2 class="nav justify-content-center">List of clothes</h2>
+<br>
+
 </head>
 
-   Pages:
+{% if forloop.counter > 5 %}
+ <h6 class="nav justify-content">Pages:  <span>
 
 {% for l in  clothes.paginator.page_range %}
+
     {% if forloop.counter < 5 %}
         <a href="?page={{forloop.counter}}">{{forloop.counter}}</a>,
     {% endif %}
 {% endfor %}
-      <br>
+{% endif %}
 
+</span></h6>
+
+<br>
 <table class="table">
 	<thead>
 		<tr>
+		    <td><strong>Clothe</strong></td>
 			<td><strong>Name</strong></td>
 			<td><strong>Size</strong></td>
 			<td><strong>Brand</strong></td>
@@ -43,15 +53,18 @@ th, td {
 	<tbody>
 		{% for clothing in clothes%}
 		<tr>
+		<td><img height="50px" width="50px" src={{MEDIA_URL}}{{clothing.photo}}></td></td>
 			<td>{{clothing.name}}</td>
 			<td>{{clothing.size}}</td>
 			<td>{{clothing.brand}}</td>
 			<td>{{clothing.user}}</td>
 			<td>{{clothing.category}}</td>
-			<td><a href='display/{{clothing.id}}'>Display {{clothing.name}}</a></td>			
+			<td><input   class="btn btn-info btn-sm" type="button" value="Display" onclick="window.location='display/{{clothing.id}}'"></input></td>
+
 			{% if user.is_authenticated and clothing.user == user %}
-				<td><a href='edit/{{clothing.id}}'>Edit {{clothing.name}}</a></td>
-				<td><a href='delete/{{clothing.id}}'>Delete</a></td>
+                <td><input   class="btn btn-info btn-sm" type="button" value="Edit" onclick="window.location='edit/{{clothing.id}}'"></input></td>
+				<td><input   class="btn btn-danger btn-sm" type="button" value="Delete" onclick="window.location='delete/{{clothing.id}}'"></input></td>
+
 			{% endif %}
 		
 		</tr>
@@ -60,10 +73,10 @@ th, td {
 </table>
 
 {% if user.is_authenticated %}
- 	<h7><a href='create'>Create new clothing</a><br></h7>
+ 	<input   class="btn btn-info btn-sm" type="button" value="Create new clothing" onclick="window.location='create'"></input>
 {% endif %}
 
-<h7><a href='filterCategory'>Filter</a><br></h7>
+<input   class="btn btn-info btn-sm" type="button" value="Filter by category" onclick="window.location='filterCategory'"></input>
 {% endblock %}
 
 

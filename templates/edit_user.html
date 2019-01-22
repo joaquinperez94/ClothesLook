@@ -1,7 +1,7 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-  <h2>Sign up</h2>
+  	<h2 class="nav justify-content-center">Edit User</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -16,6 +16,8 @@
         {% endfor %}
       </p>
     {% endfor %}
+    <div class="text-center">
     <button type="submit" class="btn btn-info">Save</button>
+    </div>
   </form>
 {% endblock %}

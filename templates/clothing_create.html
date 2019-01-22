@@ -1,7 +1,7 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-	<h2>CREATE YOUR CLOTHING</h2>
+	<h2 class="nav justify-content-center">Create clothe</h2>
    <form method='POST'>{% csrf_token %}
 {{form.as_p}}
 <button type='submit' class="btn btn-info">Save</button>

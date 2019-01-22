@@ -1,7 +1,8 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-	  	
+	<h2 class="nav justify-content-center">List of Looks</h2>
+	<br>
 <head>
 <style>
 table, th, td {
@@ -15,14 +16,19 @@ th, td {
 </style>
 </head>
 
-   Pages:
+{% if forloop.counter > 5 %}
+<h6 class="nav justify-content">Pages:  <span>
 
-{% for l in  looks.paginator.page_range %}
+{% for l in  clothes.paginator.page_range %}
+
     {% if forloop.counter < 5 %}
         <a href="?page={{forloop.counter}}">{{forloop.counter}}</a>,
     {% endif %}
 {% endfor %}
-      <br>
+{% endif %}
+</span></h6>
+
+<br>
 
 <table class="table">
 	<thead>
@@ -46,7 +52,7 @@ th, td {
 			<td>{% for clothing in look.clothes.all %}
              <li> <a href='display/{{clothing.id}}'>{{clothing.name}}</a> </li>
             {% endfor %}</td>
-			<td><a href='mostrarLook/{{look.id}}'>Ver {{look.title}}</a></td>
+			<td><input   class="btn btn-info btn-sm" type="button" value="Display" onclick="window.location='mostrarLook/{{look.id}}'"></input></td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -56,10 +62,10 @@ th, td {
 
 
 {% if user.is_authenticated %}
- 	<h7><a href='create'>Crear nuevos looks</a><br></h7>
-{% endif %}
+ 	<input   class="btn btn-info btn-sm" type="button" value="Create new look" onclick="window.location='create'"></input>
 
-<h7><a href='filtrarSeason'>Filtrar</a><br></h7>
+{% endif %}
+<input   class="btn btn-info btn-sm" type="button" value="Filter by season" onclick="window.location='filtrarSeason'"></input>
 
 {% endblock %}
 

@@ -1,6 +1,11 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
+	<h2 class="nav justify-content-center">Filter look by season</h2>
+	<br>
+	<br>
+
+<div class="text-center">
 <form method = "post">
 {% csrf_token %}
 <select name = "season" >
@@ -14,7 +19,8 @@
     <option value="Invierno" />Invierno</option>
 </select>
 
-<input  type = "submit" value="Submit">
+<input  type = "submit" class="btn btn-info btn-sm" value="Submit">
 </form>
+</div>
 {% endblock %}
 

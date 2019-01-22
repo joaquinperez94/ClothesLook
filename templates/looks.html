@@ -1,10 +1,12 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-	<h2>CREA TUS LOOKS</h2>
+		<h2 class="nav justify-content-center">Create look</h2>
    <form method='POST'>{% csrf_token %}
 {{form.as_p}}
+<div class="text-center">
 <button type='submit' class="btn btn-info">Guardar</button>
+</div>
 </form>
 {% endblock %}
 

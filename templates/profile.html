@@ -1,6 +1,7 @@
 {% extends 'banner.html' %}
 {% block contenido %}
-    <h2>My Profile</h2>
+    	<h2 class="nav justify-content-center">My Profile</h2>
+
     <br>
     <strong>Nickname: </strong>{{ user.nickName }}
     <br>
@@ -16,7 +17,7 @@
      <br>
       <br>
 
-      <h7><a   href='edit_user/{{user.id}}'>Edit profile</a><br></h7>
-      <h7><a   href='delete_user/{{user.id}}'>Delete profile</a><br></h7>
+      	<input   class="btn btn-info btn-sm" type="button" value="Edit profile" onclick="window.location='edit_user/{{user.id}}'"></input>
+      	<input   class="btn btn-danger btn-sm" type="button" value="Delete profile" onclick="window.location='delete_user/{{user.id}}'"></input>
 
 {% endblock %}

@@ -20,17 +20,17 @@
             <div class="p-3 mb-2 bg-light">
             <div class="nav justify-content-center">
 				<ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href='/inicio'>Introduction</a></li>
-                    <li class="nav-item"><a class="nav-link" href='/clothing/list'>Clothings</a></li>
-			        <li class="nav-item"><a class="nav-link" href='/looks/list'>Looks</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/inicio'><strong>Introduction</strong></a></li>
+                    <li class="nav-item"><a class="nav-link" href='/clothing/list'><strong>Clothings</strong></a></li>
+			        <li class="nav-item"><a class="nav-link" href='/looks/list'><strong>Looks</strong></a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href='/logout'>Log out</a></li>
-                    <li class="nav-item"><a class="nav-link" href='/profile'>My profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href='/clothing/listUser'>My Clothings</a></li>
-					<li class="nav-item"><a class="nav-link" href='/looks/listUser'>My looks</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/logout'><strong>Log out</strong></a></li>
+                    <li class="nav-item"><a class="nav-link" href='/profile'><strong>My profile</strong></a></li>
+                    <li class="nav-item"><a class="nav-link" href='/clothing/listUser'><strong>My Clothings</strong></a></li>
+					<li class="nav-item"><a class="nav-link" href='/looks/listUser'><strong>My looks</strong></a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link" href='/login'>Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href='/signup'>Signup</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/login'><strong>Login</strong></a></li>
+                    <li class="nav-item"><a class="nav-link" href='/signup'><strong>Signup</strong></a></li>
                     {% endif %}
                 </ul>
             </div></div>

@@ -1,10 +1,13 @@
 {% extends 'banner.html' %}
 
 {% block contenido %}
-	<h2>ADD COMMENT</h2>
+	<h2 class="nav justify-content-center">Create comment</h2>
    <form method='POST'>{% csrf_token %}
 {{form.as_p}}
+
+<div class="text-center">
 <button type='submit' class="btn btn-info">Save</button>
+</div>
 </form>
 {% endblock %}
 

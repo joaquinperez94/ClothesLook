@@ -4,9 +4,10 @@
 
 <form action='delete_user/{{user.id}}' method='POST'>{% csrf_token %}
     <h1>Do you want to delete your account {{ user.nickName }}?</h1>
-    <p><input type='submit' value='Yes' />  <a href='../'>Cancel</a></p>
-
-     <a   href='delete_user/{{user.id}}'>Delete profile</a>
+    <div class="text-center">
+    <p><input  class="btn btn-info" type='submit' value='Yes' />
+        <input class="btn btn-info" type="button" value="No"  onclick="window.location='../'"></input></p>
+     </div>
 
 </form>
 {% endblock %}

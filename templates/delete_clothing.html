@@ -3,9 +3,11 @@
 {% block contenido %}
 
 <form method='POST'>{% csrf_token %}
-    <h1>Do you want to delete clothing {{ clothing.name }}?</h1>
+    <h3>Do you want to delete clothing {{ clothing.name }}?</h3>
+     <div class="text-center">
     <button class="btn btn-info" type="submit">Yes</button>
-    <a href='../list'>Cancel</a></p>
+    <input class="btn btn-info" type="button" value="No"  onclick="window.location='../list'"></input></p>
+    </div>
 
 </form>
 {% endblock %}
