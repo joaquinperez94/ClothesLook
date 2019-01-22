@@ -83,7 +83,7 @@ class UserCreateFormAdmin(UserCreationForm):
 
     first_name = forms.CharField(label=_('First name'), required=False)
     last_name = forms.CharField(label=_('Last name'), required=False)
-    nickName = forms.CharField(label=_('Nickname'), required=True)
+    nickName = forms.EmailField(label=_('Email'), required=True)
     year_birth = forms.DateTimeField(label=_('Year of Birth'), input_formats=['%d/%m/%Y'], help_text=formato,required=False)
     sex = forms.ChoiceField(label=_('Sex'), choices=SEX_OPTIONS, required=False)
 
