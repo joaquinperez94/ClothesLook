@@ -1,15 +1,11 @@
 # -*- encoding: utf-8 -*-
-from django import forms
-from clothesLookApp.models import Clothing, Look, Category,Comment
-from dataclasses import fields
+from clothesLookApp.models import Clothing, Look,Comment
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-import datetime
-import pytz
 from django.utils import timezone
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+
 
 
 User = get_user_model()
@@ -17,50 +13,47 @@ User = get_user_model()
 
 class UserCreateForm(UserCreationForm):
     SEX_OPTIONS = (
-        ('M', _('Man')),
-        ('W', _('Woman')),
+        ('M', ('Man')),
+        ('W', ('Woman')),
     )
     formato = _("Format: dd/mm/YYYY"),
 
-    first_name = forms.CharField(label=_('First name'), required=False)
-    last_name = forms.CharField(label=_('Last name'), required=False)
-    year_birth = forms.DateTimeField(label=_('Year Birth'), input_formats=['%d/%m/%Y'], help_text=formato, required=False)
-    sex = forms.ChoiceField(label=_('Sex'), choices=SEX_OPTIONS, required=False)
-    nickName = forms.CharField(label=_('Nick Name'), max_length=40,required=True)
+    first_name = forms.CharField(label=('First name'), required=False)
+    last_name = forms.CharField(label=('Last name'), required=False)
+    year_birth = forms.DateTimeField(label=('Year Birth'), input_formats=['%d/%m/%Y'], help_text=formato, required=False)
+    sex = forms.ChoiceField(label=('Sex'), choices=SEX_OPTIONS, required=False)
+    nickName = forms.CharField(label=('Nick Name'), max_length=40,required=True)
 
     class Meta:
         model = User
         fields = ("first_name", "last_name", "year_birth", "sex","nickName", "password1", "password2")
 
-    def save(self, commit=True):
+    def save(self):
         user = super(UserCreateForm, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
         user.nickName = self.cleaned_data["nickName"]
         user.year_birth = self.cleaned_data["year_birth"]
         user.sex = self.cleaned_data["sex"]
-
-        if commit:
-            user.save()
+        user.save()
         return user
 
-    #  validations
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(UserCreateForm, self).clean(*args, **kwargs)
         nickName = cleaned_data.get('nickName', None)
-        if nickName is not None:  # look for in db
+        #Recorremos todos los usuarios para ver si ya existe
+        if nickName is not None:
             users = User.objects.all()
-
             for u in users:
                 if nickName == u.nickName:
                     self.add_error('nickName', _('Nick Name alredy exits'))
                     break
 
         year_birth = cleaned_data.get('year_birth', None)
+        # Comprobamos que la fecha de nacimiento sea en pasado
         if year_birth is not None:
             now = timezone.now()
-
             if year_birth > now:
                 self.add_error('year_birth', _('Can´t be in future'))
 
@@ -76,51 +69,49 @@ class UserChangeForm(forms.ModelForm):
 #PARA EL MÉTODO CREATESUPERUSER
 class UserCreateFormAdmin(UserCreationForm):
     SEX_OPTIONS = (
-        ('M', _('Man')),
-        ('W', _('Woman')),
+        ('M', ('Man')),
+        ('W', ('Woman')),
     )
     formato = _("Format: dd/mm/YYYY"),
 
-    first_name = forms.CharField(label=_('First name'), required=False)
-    last_name = forms.CharField(label=_('Last name'), required=False)
-    nickName = forms.EmailField(label=_('Email'), required=True)
-    year_birth = forms.DateTimeField(label=_('Year of Birth'), input_formats=['%d/%m/%Y'], help_text=formato,required=False)
-    sex = forms.ChoiceField(label=_('Sex'), choices=SEX_OPTIONS, required=False)
+    first_name = forms.CharField(label=('First name'), required=False)
+    last_name = forms.CharField(label=('Last name'), required=False)
+    nickName = forms.EmailField(label=('Nick Name'), required=True)
+    year_birth = forms.DateTimeField(label=('Year of Birth'), input_formats=['%d/%m/%Y'], help_text=formato,required=False)
+    sex = forms.ChoiceField(label=('Sex'), choices=SEX_OPTIONS, required=False)
 
     class Meta:
         model = User
         fields = ("first_name", "last_name", "nickName", "year_birth", "sex", "password1", "password2")
 
-    def save(self, commit=True):
+    def save(self):
         user = super(UserCreateFormAdmin, self).save(commit=False)
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
         user.nickName = self.cleaned_data["nickName"]
         user.year_birth = self.cleaned_data["year_birth"]
         user.sex = self.cleaned_data["sex"]
-
-        if commit:
-            user.save()
+        user.save()
         return user
 
 
     def clean(self, *args, **kwargs):
         cleaned_data = super(UserCreateFormAdmin, self).clean(*args, **kwargs)
         nickName = cleaned_data.get('nickName', None)
+        #Recorremos todos los usuarios para ver si ya existe
         if nickName is not None:
             all_users = User.objects.all()
-
             for u in all_users:
                 if nickName == u.nickName:
-                    self.add_error('nickName', _('Nickname exit'))
+                    self.add_error('nickName', ('Nickname exit'))
                     break
 
         year_birth = cleaned_data.get('year_birth', None)
+        #Comprobamos que la fecha de nacimiento sea en pasado
         if year_birth is not None:
             now = timezone.now()
-
             if year_birth > now:
-                self.add_error('year_birth', _('Can´t be in future'))
+                self.add_error('year_birth', ('Can´t be in future'))
 
 
 class ClothingForm(forms.ModelForm):
