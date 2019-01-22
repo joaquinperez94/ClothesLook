@@ -1,18 +1,11 @@
-from django.shortcuts import render,redirect
 from .forms import UserCreateForm,UserChangeForm
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from clothesLookApp.forms import ClothingForm, createLook, CommentForm
-#from clothesLookApp.forms import  registrerLook
-from django.http.response import HttpResponseRedirect
-from clothesLookApp.models import Clothing, Look, User, Category, Comment
+from clothesLookApp.models import Clothing, Look, Category, Comment
 from django.conf import settings
 from django.core.paginator import Paginator
 
-# Create your views here.
 
 #PAGINA DE INICIO
 def inicio(request):
