@@ -68,7 +68,7 @@
 		{% endfor %}
 	</tbody>
 </table>
-
+{% endif %}
     {% if user.is_authenticated %}
 <div id='commentCreate'>
     <td><a href='commentCreate/{{look.id}}'>Comment {{look.title}}</a></td>
@@ -76,7 +76,7 @@
 {% endif %}
   </fieldset>
    
-{% endif %}
+
 
 {% endblock %}
 
