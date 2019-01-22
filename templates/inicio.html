@@ -4,11 +4,42 @@
 
 
 {% block contenido %}
-    {% if user.is_authenticated %}
-        <p>!!! Welcome {{ user.username }} !!!</p>
-    {% endif %}
 
-	<p>
-    AQUI EL CONTENIDO DE LA PAGINA DE INICIO
+<style>
+	.imgRedonda {
+    width:150px;
+    height:150px;
+    border-radius:150px;
+    border:3px solid #F3F3F3;
+ </style>
+    
+    
+    {% if user.is_authenticated %}
+        <h1 align="center" >Welcome {{ user.nickName }} !</h1	>
+    {% endif %}
+     {% if not user.is_authenticated %}
+        <h1 align="center" > Welcome!</h1	>
+    {% endif %}
+<br/>
+	<h5 align="center" >
+    A fashion trend portal where you can both share your outfits</h5> <h5 align="center" >and combine all the most closely related looks to your style. 
+	</h5>
+	
+	
+	<br/><br/><br/>
+		<p>
+  	 <img src='https://66.media.tumblr.com/4db35d5640a9df326c1d5ffdcdb0cabc/tumblr_oxqd7ih1Zi1vmqjwpo1_250.png' class='imgRedonda'/>
+	<img src='https://i.pinimg.com/originals/26/d1/c4/26d1c408c154213376d5b4a56193f015.jpg' class='imgRedonda'/>
+	 <img src='https://i.pinimg.com/originals/fe/d6/b2/fed6b2e4e1e06e88a46c2ce7966e45fc.jpg' class='imgRedonda'/>
+	 
+	 <img src='https://i.pinimg.com/originals/76/f2/d2/76f2d284d5bc3f4a20bbed77b43f7e23.jpg' class='imgRedonda'/>
+  	  <img src='https://i.pinimg.com/564x/d1/ff/1c/d1ff1c62d49829cca21135e06771421e.jpg' class='imgRedonda'/>
+	 <img src='https://i.pinimg.com/564x/65/55/1f/65551fe6b39090efceac9686448e6fdd.jpg' class='imgRedonda'/>
 	</p>
+	
+
+	
+	
 {% endblock %}
+
+}
