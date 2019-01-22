@@ -3,7 +3,6 @@ from clothesLookApp.models import Clothing, Look,Comment
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 
@@ -16,13 +15,13 @@ class UserCreateForm(UserCreationForm):
         ('M', ('Man')),
         ('W', ('Woman')),
     )
-    formato = _("Format: dd/mm/YYYY"),
+    formato =("Format: dd/mm/YYYY"),
 
     first_name = forms.CharField(label=('First name'), required=False)
     last_name = forms.CharField(label=('Last name'), required=False)
     year_birth = forms.DateTimeField(label=('Year Birth'), input_formats=['%d/%m/%Y'], help_text=formato, required=False)
     sex = forms.ChoiceField(label=('Sex'), choices=SEX_OPTIONS, required=False)
-    nickName = forms.CharField(label=('Nick Name'), max_length=40,required=True)
+    nickName = forms.CharField(label=('Nick Name'), max_length=50,required=True)
 
     class Meta:
         model = User
@@ -47,7 +46,7 @@ class UserCreateForm(UserCreationForm):
             users = User.objects.all()
             for u in users:
                 if nickName == u.nickName:
-                    self.add_error('nickName', _('Nick Name alredy exits'))
+                    self.add_error('nickName',('Nick Name alredy exits'))
                     break
 
         year_birth = cleaned_data.get('year_birth', None)
@@ -55,7 +54,7 @@ class UserCreateForm(UserCreationForm):
         if year_birth is not None:
             now = timezone.now()
             if year_birth > now:
-                self.add_error('year_birth', _('Can´t be in future'))
+                self.add_error('year_birth',('Can´t be in future'))
 
 
 class UserChangeForm(forms.ModelForm):
@@ -72,7 +71,7 @@ class UserCreateFormAdmin(UserCreationForm):
         ('M', ('Man')),
         ('W', ('Woman')),
     )
-    formato = _("Format: dd/mm/YYYY"),
+    formato =("Format: dd/mm/YYYY"),
 
     first_name = forms.CharField(label=('First name'), required=False)
     last_name = forms.CharField(label=('Last name'), required=False)
@@ -103,7 +102,7 @@ class UserCreateFormAdmin(UserCreationForm):
             all_users = User.objects.all()
             for u in all_users:
                 if nickName == u.nickName:
-                    self.add_error('nickName', ('Nickname exit'))
+                    self.add_error('nickName', ('Nickname exits'))
                     break
 
         year_birth = cleaned_data.get('year_birth', None)

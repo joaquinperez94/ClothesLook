@@ -1,41 +1,27 @@
 from django.db import models
-from django.conf import settings
-#from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.utils.translation import ugettext_lazy as _
 from .managers import UserManager
 
-# Create your models here.
-# class User(models.Model):
-#     name=models.CharField(max_length=100)
-#     nick=models.CharField(unique=True,max_length=20)
-#     email=models.EmailField(blank=False)
-#     password=models.CharField(max_length=50)
-#
-#     def __str__(self):
-#         return "%s %s" % (self.name)
 
 class User(AbstractBaseUser, PermissionsMixin):
     SEX_OPTIONS = (
         ('M', 'Man'),
         ('W', 'Woman'),
     )
-    nickName = models.CharField(_('Nick Name'),unique=True, max_length=30)
-    first_name = models.CharField(_('First name'),max_length=30, blank=True)
-    last_name = models.CharField(_('Last name'),max_length=60, blank=True)
-    year_birth = models.DateField(_('Year of Birth'),null=True)
-    sex = models.CharField(_('Sex'),max_length=1, choices=SEX_OPTIONS, null=True)
-    is_active = models.BooleanField(_('Is active'),default=True)
-    is_staff = models.BooleanField(_('Is staf'),default=False)
+
+    nickName = models.CharField(('Nick Name'),unique=True, max_length=50)
+    first_name = models.CharField(('First name'),max_length=60, blank=True)
+    last_name = models.CharField(('Last name'),max_length=60, blank=True)
+    year_birth = models.DateField(('Year of Birth'),null=True)
+    sex = models.CharField(('Sex'),max_length=1, choices=SEX_OPTIONS, null=True)
+    is_active = models.BooleanField(('Is active'),default=True)
+    is_staff = models.BooleanField(('Is staf'),default=False)
 
     objects = UserManager()
-
     USERNAME_FIELD = 'nickName'
     REQUIRED_FIELDS = []
-
-
 
 
 
