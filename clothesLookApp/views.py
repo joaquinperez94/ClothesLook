@@ -1,10 +1,18 @@
 from .forms import UserCreateForm,UserChangeForm
 from django.shortcuts import render, get_object_or_404,redirect
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from clothesLookApp.forms import ClothingForm, createLook, CommentForm
 from clothesLookApp.models import Clothing, Look, Category, Comment
 from django.conf import settings
 from django.core.paginator import Paginator
+
+
+def check_owner(request, owner_id):
+    """Only the owner may modify or delete the object: 403 for anyone else."""
+    if request.user.pk != owner_id:
+        raise PermissionDenied
 
 
 #PAGINA DE INICIO
@@ -12,6 +20,7 @@ def inicio(request):
     return render(request,'inicio.html')
 
 #PAGINA DE PRENDAS 
+@login_required
 def clothing_create(request):     
     if request.user.is_authenticated:
         user = request.user   
@@ -36,6 +45,7 @@ def clothes_list(request):
 
     return render(request,'clothes_list.html', {'clothes':clothes,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
+@login_required
 def clothes_list_user(request):
     clothes = Clothing.objects.filter(user = request.user)
     paginator = Paginator(clothes, 5)
@@ -58,15 +68,19 @@ def filter_category_clothing(request):
         categories = Category.objects.all()
         return render(request,'filter_category_clothing.html', {'categories':categories,'MEDIA_URL': settings.MEDIA_URL})
 
+@login_required
 def delete_clothing(request, id_clothing):
-    clothing = Clothing.objects.get(id=id_clothing)
+    clothing = get_object_or_404(Clothing, id=id_clothing)
+    check_owner(request, clothing.user_id)
     if request.method == "POST":
         clothing.delete()
         return redirect('../../../clothing/list')
     return render(request,'delete_clothing.html', {'clothing':clothing})
 
+@login_required
 def edit_clothing(request,id_clothing):
-    clothing = Clothing.objects.get(id=id_clothing)
+    clothing = get_object_or_404(Clothing, id=id_clothing)
+    check_owner(request, clothing.user_id)
     if request.method == 'GET':
         form=ClothingForm(instance=clothing)
     else:
@@ -77,6 +91,7 @@ def edit_clothing(request,id_clothing):
     return render(request, 'clothing_create.html', {'form': form})
 
 #PAGINA DE LOOKS
+@login_required
 def looks_create(request):
     if request.user.is_authenticated:
         user = request.user
@@ -102,6 +117,7 @@ def lista_looks(request):
 
     return render(request,'listaLooks.html', {'looks':looks,'page':page,'MEDIA_URL': settings.MEDIA_URL})
 
+@login_required
 def lista_looks_usuario(request):
     looks=Look.objects.filter(user = request.user)
     paginator= Paginator(looks,5)
@@ -124,25 +140,31 @@ def filtrar_season_look(request):
         return render(request,'filtrarSeasonLooks.html', {'MEDIA_URL': settings.MEDIA_URL})
 
 #PAGINA DE PROFILE
+@login_required
 def profile(request):
     if request.user.is_authenticated:
         user = request.user
         return render(request, 'profile.html', {"user": user})
 
+@login_required
 def delete_user(request, id_user):
     User = get_user_model()
-    user = User.objects.get(id=id_user)
+    user = get_object_or_404(User, id=id_user)
+    check_owner(request, user.pk)
     if request.method == "POST":
         user.delete()
+        logout(request)
         return render(request, 'inicio.html')
     context = {
         "User": user
     }
     return render(request, "user_delete.html", context)
 
+@login_required
 def edit_user(request,id_user):
     User = get_user_model()
-    user=User.objects.get(id=id_user)
+    user = get_object_or_404(User, id=id_user)
+    check_owner(request, user.pk)
     if request.method == 'GET':
         form=UserChangeForm(instance=user)
     else:
@@ -166,6 +188,7 @@ def signup(request):
 
 
 #PAGINA DE COMENTARIOS 
+@login_required
 def comment_create(request,id_look):     
     if request.user.is_authenticated:
         user = request.user   
