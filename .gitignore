@@ -1,1 +1,25 @@
-*.pyc
+# Python
+__pycache__/
+*.py[cod]
+
+# Base de datos local de desarrollo (se crea con "python manage.py migrate")
+db.sqlite3
+db.sqlite3-journal
+
+# Entornos virtuales y variables de entorno locales (secretos): no se versionan
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# IDE (PyCharm, Eclipse/PyDev, VS Code)
+.idea/
+.project
+.pydevproject
+.settings/
+.vscode/
+
+# Otros
+*.log
+staticfiles/
