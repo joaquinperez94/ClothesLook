@@ -1,0 +1,9 @@
+# Keeps the pinned GitHub Actions up to date. Python dependencies are not
+# included on purpose: Django is pinned to 2.1 and upgrading to a supported
+# release needs manual work (see README).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

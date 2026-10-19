@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,13 +21,32 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w%^gaz$a-p7crvndg&qys_!c2vlr_qf&(c!@=fgi!n=fc^r@x7'
+def env_bool(name, default=False):
+    """Read a boolean flag from the environment ("1", "true", "yes", "on")."""
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in ('1', 'true', 'yes', 'on')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG is off unless DJANGO_DEBUG=1 is set (local development only).
+DEBUG = env_bool('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+# Read from DJANGO_SECRET_KEY (see .env.example). Only when DEBUG is on is a
+# fixed, public development key used as a fallback.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'django-insecure-development-only-key-do-not-use-in-production'
+    else:
+        raise ImproperlyConfigured(
+            'Set the DJANGO_SECRET_KEY environment variable '
+            '(or DJANGO_DEBUG=1 for local development). See .env.example.')
+
+# Comma-separated host names, e.g. "example.com,www.example.com".
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if host.strip()]
 
 AUTH_USER_MODEL = 'clothesLookApp.User'
 
@@ -123,3 +144,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL='inicio'
 LOGOUT_REDIRECT_URL='inicio'
+# Views protected with @login_required redirect here (path 'login/' in urls.py).
+LOGIN_URL = '/login/'

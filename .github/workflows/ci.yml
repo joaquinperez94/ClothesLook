@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege: the workflow only needs to read the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Django tests (Python 3.7, Django 2.1)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Django 2.1 supports Python 3.5-3.7 (the team used 3.7). actions/setup-python
+    # no longer provides 3.7 on current Ubuntu runners, so the official Python
+    # 3.7 image is used as the job container.
+    container: python:3.7-slim
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install dependencies
+        run: python -m pip install --no-cache-dir -r requirements.txt
+
+      # A random, throwaway key for this run; no secret is stored in the repo.
+      - name: Generate an ephemeral SECRET_KEY
+        run: echo "DJANGO_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_urlsafe(50))')" >> "$GITHUB_ENV"
+
+      - name: Django system checks
+        run: python manage.py check
+
+      - name: Migrations match the models
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Tests
+        run: python manage.py test --verbosity 2
